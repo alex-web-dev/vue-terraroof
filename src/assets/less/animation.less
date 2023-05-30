@@ -1,0 +1,43 @@
+.fade-move {
+  transition: transform 0.4s;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes pulse-small {
+  0% {
+    box-shadow: 0 0 0 0px rgba(116, 228, 116, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 0 12px rgba(207, 241, 207, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(116, 228, 116, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 0 40px rgba(207, 241, 207, 0);
+  }
+}
+
+@keyframes pulse-mark {
+  0% {
+    box-shadow: 0 0 0 0px rgba(221, 221, 221, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 0 16px rgba(207, 241, 207, 0);
+  }
+}

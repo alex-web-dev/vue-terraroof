@@ -1,0 +1,76 @@
+.btn {
+  padding: 14px 36px;
+  display: inline-block;
+  background-color: @color-primary;
+  border: 2px solid @color-primary;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fdf9f9;
+  transition: color 0.3s, background 0.3s, border 0.3s;
+
+  @media (min-width: 767.01px) {
+    &:hover {
+      background-color: transparent;
+      color: @color-primary;
+    }
+  }
+
+  &--border {
+    background-color: transparent;
+    color: @color-primary;
+
+    @media (min-width: 767.01px) {
+      &:hover {
+        background-color: @color-primary;
+        color: #fdf9f9;
+      }
+    }
+  }
+
+  &--white {
+    background-color: #fff;
+    color: @color-primary;
+    border-color: #fff;
+
+    @media (min-width: 767.01px) {
+      &:hover {
+        background-color: transparent;
+        color: #fff;
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding: 12px 30px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+    padding: 10px 26px;
+
+    &--sm-primary {
+      background-color: @color-primary;
+      color: #fdf9f9;
+
+      &:hover {
+        background-color: transparent;
+        color: @color-primary;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    &--xs-border {
+      background-color: transparent;
+      color: @color-primary;
+
+      &:hover {
+        background-color: @color-primary;
+        color: #fdf9f9;
+      }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+<template>
+  <ul class="submenu" ref="$submenu">
+    <li
+      class="submenu__item"
+      v-for="subitem in subMenu"
+      :key="subitem"
+      @click="emit('clickOnItem')"
+    >
+      <RouterLink class="submenu__item-link" :to="{ name: subitem.routerName }">{{
+        subitem.text
+      }}</RouterLink>
+    </li>
+  </ul>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+defineProps({
+  subMenu: {
+    type: Array,
+    required: true
+  }
+});
+const emit = defineEmits(['clickOutside', 'clickOnItem']);
+const $submenu = ref(null);
+
+window.addEventListener('click', (e) => {
+  if (!$submenu.value || $submenu.value == e.target || $submenu.value.contains(e.target)) {
+    return;
+  }
+
+  emit('clickOutside');
+});
+</script>
+
+<style lang="less" scoped>
+@import '@/assets/less/vars.less';
+
+.submenu {
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eeeeee;
+
+  &__item {
+    &-link {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+
+    &-img {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border-radius: 6px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &-icon {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f8f8;
+      border-radius: 6px;
+
+      img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+      }
+    }
+
+    &-text {
+      font-size: 20px;
+      line-height: 1.5;
+
+      &:not(:first-child) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  @media (max-width: 1240px) {
+    &__item {
+      &-text {
+        font-size: 18px;
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+
+    &__item {
+      &:not(:first-child) {
+        margin-top: 0;
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        display: none;
+      }
+
+      &-img {
+        width: 24px;
+        height: 24px;
+        display: none;
+      }
+
+      &-link {
+        padding: 11px 12px 10px 24px;
+        border-top: 1px solid #e0e5ed;
+      }
+
+      &-text {
+        font-size: 16px;
+        line-height: 1.375;
+
+        &:not(:first-child) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+</style>
