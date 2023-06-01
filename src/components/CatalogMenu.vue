@@ -1,30 +1,38 @@
 <template>
   <div class="catalog-menu" ref="$catalogMenu">
-    <div class="catalog-menu__content" data-simplebar>
-      <div class="title4 catalog-menu__title">Каталог</div>
-      <div class="catalog-menu__list">
-        <RouterLink
-          class="catalog-menu__item"
-          :class="{ 'catalog-menu__item--big': item.isBig }"
-          :to="{ name: 'catalog' }"
-          v-for="item in list"
-          :key="item"
-          @click="closeMenu"
-        >
-          <div class="catalog-menu__item-img">
-            <img :src="getImage(item.img)" alt="" />
+    <!-- <Simplebar> -->
+    <div class="catalog-menu__content">
+      <Simplebar>
+        <div class="catalog-menu__main">
+          <div class="title4 catalog-menu__title">Каталог</div>
+          <div class="catalog-menu__list">
+            <RouterLink
+              class="catalog-menu__item"
+              :class="{ 'catalog-menu__item--big': item.isBig }"
+              :to="{ name: 'catalog' }"
+              v-for="item in list"
+              :key="item"
+              @click="closeMenu"
+            >
+              <div class="catalog-menu__item-img">
+                <img :src="getImage(item.img)" alt="" />
+              </div>
+              <div class="catalog-menu__item-title">{{ item.title }}</div>
+            </RouterLink>
           </div>
-          <div class="catalog-menu__item-title">{{ item.title }}</div>
-        </RouterLink>
-      </div>
-      <button class="catalog-menu__close" @click="closeMenu"></button>
+          <button class="catalog-menu__close" @click="closeMenu"></button>
+        </div>
+      </Simplebar>
     </div>
+    <!-- </Simplebar> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { getImage } from '@/hooks/img';
+import Simplebar from 'simplebar-vue';
+import 'simplebar-vue/dist/simplebar.min.css';
 
 const emit = defineEmits(['clickOutside', 'close']);
 const $catalogMenu = ref(null);
@@ -59,18 +67,26 @@ defineProps({
   height: 100%;
   z-index: 50;
 
+  [data-simplebar] {
+    flex: 1 1 100%;
+  }
+
   &__content {
     position: absolute;
     left: 50%;
     top: calc(50% - 4px);
     transform: translate(-50%, -50%);
-    padding: 48px 65px 25px 62px;
     width: calc(100% - 38px);
     max-height: calc(100% - 64px - 72px);
     max-width: 1142px;
     background: #ffffff;
     border: 2px solid #eeeeee;
     border-radius: 15px;
+    display: flex;
+  }
+
+  &__main {
+    padding: 48px 65px 25px 62px;
   }
 
   &__title {
@@ -167,7 +183,7 @@ defineProps({
   }
 
   @media (max-width: 1240px) {
-    &__content {
+    &__main {
       padding: 32px 32px 24px 32px;
     }
 
@@ -204,10 +220,13 @@ defineProps({
     &__content {
       position: static;
       transform: translate(0, 0);
-      padding: 0 12px 18px 18px;
       width: 100%;
       max-height: none;
       border: none;
+    }
+
+    &__main {
+      padding: 0 12px 18px 18px;
     }
 
     &__list {
