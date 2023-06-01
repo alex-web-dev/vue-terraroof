@@ -1,19 +1,16 @@
 <template>
-  <div class="products">
-    <div class="products__list">
-      <ProductCard
-        class="products__item"
-        type="preview"
-        :data="product"
-        v-for="product in products"
-        :key="product"
-      />
+  <section class="products-section">
+    <div class="container">
+      <div class="products-section__content">
+        <h2 v-if="title" class="title2 title2--center products-section__title">{{ title }}</h2>
+        <AppProducts class="products-section__main" :products="products" />
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
-import ProductCard from '@/components/ProductCard.vue';
+import AppProducts from '@/components/AppProducts.vue';
 
 defineProps({
   title: {
@@ -47,7 +44,7 @@ const products = [
 <style lang="less" scoped>
 @import '@/assets/less/vars.less';
 
-.products {
+.products-section {
   &__title {
     margin-bottom: 50px;
 
@@ -59,21 +56,6 @@ const products = [
   &__subtitle {
     margin-bottom: 24px;
     font-weight: 700;
-  }
-
-  &__list {
-    margin: -32px -10px 0;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  &__item {
-    margin: 32px 10px 0;
-    width: calc(100% / 12 * 4 - 20px);
-
-    &--col-4 {
-      width: calc(25% - 20px);
-    }
   }
 
   @media (max-width: 1240px) {

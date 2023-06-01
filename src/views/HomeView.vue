@@ -12,7 +12,7 @@
     <AppFeatures class="main__section" />
     <AppArticle class="main__section" />
     <AppOffer class="main__section" />
-    <AppProducts class="main__section" />
+    <ProductsSection class="main__section" title="Oтличные предложения" />
     <VideoSection class="main__section" />
     <CategoriesSection class="main__section" />
     <CallbackBg class="main__section" bg="callback-bg2.jpg" :backdrop="false">
@@ -59,7 +59,6 @@ import CallbackBg from '@/components/CallbackBg.vue';
 import AppFeatures from '@/components/AppFeatures.vue';
 import AppArticle from '@/components/AppArticle.vue';
 import AppOffer from '@/components/AppOffer.vue';
-import AppProducts from '@/components/AppProducts.vue';
 import VideoSection from '@/components/VideoSection.vue';
 import CategoriesSection from '@/components/CategoriesSection.vue';
 import ImagesSection from '@/components/ImagesSection.vue';
@@ -70,6 +69,7 @@ import PriceList from '@/components/PriceList.vue';
 import AppSocial from '@/components/AppSocial.vue';
 import AppGallery from '@/components/AppGallery.vue';
 import { reactive } from 'vue';
+import ProductsSection from '../components/ProductsSection.vue';
 
 const instagramGalleryList = reactive([
   {
