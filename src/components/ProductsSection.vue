@@ -3,7 +3,7 @@
     <div class="container">
       <div class="products-section__content">
         <h2 v-if="title" class="title2 title2--center products-section__title">{{ title }}</h2>
-        <AppProducts class="products-section__main" :products="products" />
+        <AppProducts class="products-section__main" :products="products" type="preview" />
       </div>
     </div>
   </section>
@@ -11,6 +11,7 @@
 
 <script setup>
 import AppProducts from '@/components/AppProducts.vue';
+import { useProducts } from '@/stores/products';
 
 defineProps({
   title: {
@@ -19,26 +20,8 @@ defineProps({
   }
 });
 
-const products = [
-  {
-    img: 'products/1.jpg',
-    name: 'Черепица Metrotile',
-    text: 'Его корни уходят в один фрагмент классической латыни 45 года н.э',
-    price: 15200
-  },
-  {
-    img: 'products/2.jpg',
-    name: 'Черепица Metrotile',
-    text: 'Его корни уходят в один фрагмент классической латыни 45 года н.э',
-    price: 15200
-  },
-  {
-    img: 'products/3.jpg',
-    name: 'Черепица Metrotile',
-    text: 'Его корни уходят в один фрагмент классической латыни 45 года н.э',
-    price: 15200
-  }
-];
+const storeProducts = useProducts();
+const products = storeProducts.getProducts({ limit: 3 });
 </script>
 
 <style lang="less" scoped>

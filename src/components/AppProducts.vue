@@ -3,9 +3,9 @@
     <div class="products__list">
       <ProductCard
         class="products__item"
-        type="preview"
-        :data="product"
         v-for="product in products"
+        :data="product"
+        :type="type"
         :key="product"
       />
     </div>
@@ -19,29 +19,16 @@ defineProps({
   title: {
     type: String,
     default: null
+  },
+  products: {
+    type: Array,
+    required: true
+  },
+  type: {
+    type: String,
+    default: null
   }
 });
-
-const products = [
-  {
-    img: 'products/1.jpg',
-    name: 'Черепица Metrotile',
-    text: 'Его корни уходят в один фрагмент классической латыни 45 года н.э',
-    price: 15200
-  },
-  {
-    img: 'products/2.jpg',
-    name: 'Черепица Metrotile',
-    text: 'Его корни уходят в один фрагмент классической латыни 45 года н.э',
-    price: 15200
-  },
-  {
-    img: 'products/3.jpg',
-    name: 'Черепица Metrotile',
-    text: 'Его корни уходят в один фрагмент классической латыни 45 года н.э',
-    price: 15200
-  }
-];
 </script>
 
 <style lang="less" scoped>

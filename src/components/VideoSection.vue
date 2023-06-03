@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { useModals } from '../stores/modals';
+import { useModals } from '@/stores/modals';
 
 const storeModals = useModals();
 </script>

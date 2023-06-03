@@ -10,7 +10,7 @@
         v-for="(item, index) in data.items"
         :key="item"
         :model-value="item.value"
-        :error-absolute="true"
+        :error-absolute="errorAbsolute"
         @focus="emit('focusField', item)"
         @update:model-value="emit('updateField', index, $event)"
       />
@@ -44,6 +44,10 @@ const props = defineProps({
   data: {
     type: Object,
     required: true
+  },
+  errorAbsolute: {
+    type: Boolean,
+    default: false
   }
 });
 const emit = defineEmits(['formSubmit', 'focusField', 'updateField', 'closeMessage']);

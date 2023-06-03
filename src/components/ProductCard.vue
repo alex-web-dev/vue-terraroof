@@ -1,23 +1,22 @@
 <template>
   <div class="product-card" :class="{ 'product-card--preview': type === 'preview' }">
-    <a class="product-card__img-box product-card__img-box--large">
+    <div class="product-card__img-box product-card__img-box--large">
       <img class="product-card__img" :src="getImage(data.img)" alt="" />
-      <AppTags
-        class="product-card__tags"
-        list-position="end"
-        :list="[{ type: 'sale', text: 'акция' }]"
-      />
-    </a>
+      <AppTags class="product-card__tags" v-if="data.tags" list-position="end" :list="data.tags" />
+    </div>
     <div class="product-card__info product-card__info--large">
       <h3 class="title5 product-card__name">
-        <a href="product-card.html">{{ data.name }}</a>
+        <a href="#">{{ data.name }}</a>
       </h3>
       <p class="text text--gray product-card__text">{{ data.text }}</p>
       <div class="product-card__price">
-        <div class="product-card__price-new">
+        <span class="product-card__price-old" v-if="data.priceOld">
+          <span class="product-card__price-old-value">{{ data.priceOld }}</span>
+        </span>
+        <span class="product-card__price-new">
           <span class="product-card__price-new-value">{{ data.price }}</span>
           тг
-        </div>
+        </span>
       </div>
       <RouterLink class="btn btn--border product-card__btn product-card__btn--mt-32" to="#callback"
         >Заказать</RouterLink

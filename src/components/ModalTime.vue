@@ -17,7 +17,7 @@
 import ModalForm from '@/components/ModalForm.vue';
 import AppModal from '@/components/AppModal.vue';
 import { formValidate, clearError, clearValues } from '@/hooks/form';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
 const emit = defineEmits(['close']);
 defineProps({
@@ -26,7 +26,7 @@ defineProps({
     default: false
   }
 });
-const formData = ref({
+const formData = reactive({
   isSent: false,
   items: [
     {
@@ -75,13 +75,13 @@ const formData = ref({
 });
 
 function updateField(index, value) {
-  formData.value.items[index].value = value;
+  formData.items[index].value = value;
 }
 
 function formSubmit() {
-  if (formValidate(formData.value)) {
-    clearValues(formData.value.items);
-    formData.value.isSent = true;
+  if (formValidate(formData)) {
+    clearValues(formData.items);
+    formData.isSent = true;
   }
 }
 </script>

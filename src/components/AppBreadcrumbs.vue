@@ -1,3 +1,31 @@
+<template>
+  <div class="breadcrumbs catalog__breadcrumbs">
+    <div class="breadcrumbs__list">
+      <div class="breadcrumbs__item" v-for="item in list" :key="item">
+        <RouterLink v-if="item.route" class="breadcrumbs__link" :to="{ name: item.route }">{{
+          item.name
+        }}</RouterLink>
+        <span v-else class="breadcrumbs__current">{{ item.name }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { RouterLink } from 'vue-router';
+
+defineProps({
+  list: {
+    type: Array,
+    required: true
+  }
+});
+</script>
+
+<style lang="less" scoped>
+@import '@/assets/less/vars.less';
+@import '@/assets/less/mixins.less';
+
 .breadcrumbs {
   padding-bottom: 24px;
   font-size: 14px;
@@ -64,3 +92,4 @@
     }
   }
 }
+</style>

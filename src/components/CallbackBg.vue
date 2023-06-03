@@ -14,6 +14,7 @@
             class="callback-bg__form"
             line="row"
             :data="formData"
+            :error-absolute="true"
             @form-submit="formSubmit"
             @focus-field="clearError"
             @update-field="updateField"
@@ -30,10 +31,10 @@
 </template>
 
 <script setup>
-import { getImage } from '@/hooks/img';
 import AppForm from '@/components/AppForm.vue';
-import { ref, useSlots } from 'vue';
+import { getImage } from '@/hooks/img';
 import { formValidate, clearError, clearValues } from '@/hooks/form';
+import { reactive, useSlots } from 'vue';
 
 const slots = useSlots();
 
@@ -52,7 +53,7 @@ defineProps({
   }
 });
 
-const formData = ref({
+const formData = reactive({
   isSent: false,
   items: [
     {
@@ -84,13 +85,13 @@ const formData = ref({
 });
 
 function updateField(index, value) {
-  formData.value.items[index].value = value;
+  formData.items[index].value = value;
 }
 
 function formSubmit() {
-  if (formValidate(formData.value)) {
-    clearValues(formData.value.items);
-    formData.value.isSent = true;
+  if (formValidate(formData)) {
+    clearValues(formData.items);
+    formData.isSent = true;
   }
 }
 </script>

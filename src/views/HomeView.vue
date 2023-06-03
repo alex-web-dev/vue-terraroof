@@ -68,8 +68,8 @@ import AppFaq from '@/components/AppFaq.vue';
 import PriceList from '@/components/PriceList.vue';
 import AppSocial from '@/components/AppSocial.vue';
 import AppGallery from '@/components/AppGallery.vue';
+import ProductsSection from '@/components/ProductsSection.vue';
 import { reactive } from 'vue';
-import ProductsSection from '../components/ProductsSection.vue';
 
 const instagramGalleryList = reactive([
   {
