@@ -1,12 +1,15 @@
 <template>
   <div class="product-card" :class="{ 'product-card--preview': type === 'preview' }">
-    <div class="product-card__img-box product-card__img-box--large">
+    <RouterLink
+      class="product-card__img-box product-card__img-box--large"
+      :to="{ name: 'product', params: { id: data.id } }"
+    >
       <img class="product-card__img" :src="getImage(data.img)" alt="" />
       <AppTags class="product-card__tags" v-if="data.tags" list-position="end" :list="data.tags" />
-    </div>
+    </RouterLink>
     <div class="product-card__info product-card__info--large">
       <h3 class="title5 product-card__name">
-        <a href="#">{{ data.name }}</a>
+        <RouterLink :to="{ name: 'product', params: { id: data.id } }">{{ data.name }}</RouterLink>
       </h3>
       <p class="text text--gray product-card__text">{{ data.text }}</p>
       <div class="product-card__price">
@@ -28,6 +31,7 @@
 <script setup>
 import { getImage } from '@/hooks/img';
 import AppTags from '@/components/AppTags.vue';
+import { RouterLink } from 'vue-router';
 
 defineProps({
   type: {

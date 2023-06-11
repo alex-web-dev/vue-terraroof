@@ -96,6 +96,7 @@ const companies = reactive([
 @import '@/assets/less/vars.less';
 
 .footer {
+  margin-top: auto;
   padding: 46px 0 8px;
   background-color: @color-black;
 

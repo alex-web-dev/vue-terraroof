@@ -2,7 +2,7 @@
   <aside class="catalog-sidebar" :class="{ 'catalog-sidebar--active': open }">
     <div class="catalog-sidebar__content">
       <div class="catalog-sidebar__title">Каталог</div>
-      <ul class="catalog-sidebar__list">
+      <ul v-if="categories" class="catalog-sidebar__list">
         <li
           class="catalog-sidebar__item"
           :class="{ 'catalog-sidebar__item--active': category.open }"
@@ -16,23 +16,24 @@
               :src="getImage(category.img)"
               alt=""
             />
-            <span class="catalog-sidebar__btn-text">{{ category.title }}</span>
+            <span class="catalog-sidebar__btn-text">{{ category.name }}</span>
           </button>
           <ul class="catalog-sidebar__sublist">
             <li
               class="catalog-sidebar__subitem"
-              v-for="subCategory in category.list"
+              v-for="subCategory in category.children"
               :key="subCategory"
             >
-              <label class="checkbox">
-                <input class="checkbox__input" type="checkbox" />
-                <span class="checkbox__switch"></span>
-                <span class="checkbox__text">{{ subCategory }}</span>
-              </label>
+              <AppCheckbox
+                :text="subCategory.name"
+                :checked="subCategory.checked"
+                @update:checked="subCategory.checked = $event"
+              />
             </li>
           </ul>
         </li>
       </ul>
+      <div v-else class="catalog-sidebar__text">Категорий на найдено</div>
       <div class="catalog-sidebar__close" @click="emit('close')"></div>
     </div>
     <div class="catalog-sidebar__backdrop" @click="emit('close')"></div>
@@ -40,54 +41,20 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
 import { getImage } from '@/hooks/img';
+import AppCheckbox from './AppCheckbox.vue';
 
 defineProps({
   open: {
     type: Boolean,
     default: false
+  },
+  categories: {
+    type: Array,
+    default: null
   }
 });
 const emit = defineEmits(['close']);
-
-const categories = reactive([
-  {
-    title: 'Акции',
-    list: ['Metrotile', 'Metrotile', 'Metrotile'],
-    open: false
-  },
-  {
-    img: 'catalog/1.jpg',
-    title: 'Керамическая черепица',
-    list: ['Metrotile', 'Metrotile'],
-    open: false
-  },
-  {
-    img: 'catalog/2.jpg',
-    title: 'Композитная черепица',
-    list: ['Metrotile'],
-    open: false
-  },
-  {
-    img: 'catalog/3.jpg',
-    title: 'Гибкая (битумная) черепица',
-    list: ['Metrotile'],
-    open: false
-  },
-  {
-    img: 'catalog/4.jpg',
-    title: 'Металлочерепица',
-    list: ['Metrotile'],
-    open: false
-  },
-  {
-    img: 'catalog/5.jpg',
-    title: 'Медная кровля',
-    list: ['Metrotile'],
-    open: false
-  }
-]);
 </script>
 
 <style lang="less" scoped>
@@ -100,6 +67,10 @@ const categories = reactive([
     font-size: 20px;
     line-height: 1.5;
     text-transform: uppercase;
+  }
+
+  &__text {
+    color: @color-gray;
   }
 
   &__item {

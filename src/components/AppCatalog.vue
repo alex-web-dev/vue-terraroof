@@ -13,8 +13,9 @@
             class="catalog__sidebar"
             :open="isSidebarOpen"
             @close="isSidebarOpen = false"
+            :categories="categories"
           />
-          <AppProducts class="catalog__products" :products="products" />
+          <AppProducts class="catalog__products" :products="filteredProducts" />
         </div>
       </div>
     </div>
@@ -26,12 +27,40 @@ import AppProducts from '@/components/AppProducts.vue';
 import CatalogSidebar from '@/components/CatalogSidebar.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import { useProducts } from '@/stores/products';
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
+import { useCategories } from '@/stores/categories';
 
 const isSidebarOpen = ref(false);
 const breadcrumbs = reactive([{ name: 'Главная', route: 'home' }, { name: 'Каталог' }]);
 const storeProducts = useProducts();
 const products = storeProducts.getProducts();
+const storeCategories = useCategories();
+const categories = reactive(
+  storeCategories.getCategoriesTree().map((category) => {
+    category.children.forEach((subCategory) => {
+      subCategory.checked = false;
+    });
+
+    return category;
+  })
+);
+const filteredProducts = computed(() => {
+  const filtered = products.filter((product) => {
+    let isChecked = false;
+    categories.forEach((category) => {
+      category.children.forEach((subCategory) => {
+        if (subCategory.checked && subCategory.id === product.id) {
+          isChecked = true;
+          return;
+        }
+      });
+    });
+
+    return isChecked;
+  });
+
+  return filtered.length === 0 ? products : filtered;
+});
 </script>
 
 <style lang="less" scoped>

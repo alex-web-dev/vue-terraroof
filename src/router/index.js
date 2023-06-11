@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import CatalogView from '@/views/CatalogView.vue';
+import ProductAbout from '@/views/ProductAbout.vue';
 
 const DEFAULT_TITLE = 'Terraroof';
 
@@ -21,6 +22,15 @@ const routes = [
       title: `${DEFAULT_TITLE} - Каталог`,
       layout: 'main'
     }
+  },
+  {
+    path: '/product/:id',
+    name: 'product',
+    component: ProductAbout,
+    meta: {
+      title: `${DEFAULT_TITLE} - Подробнее о товаре`,
+      layout: 'main'
+    }
   }
 ];
 
@@ -35,6 +45,8 @@ const router = createRouter({
         top: 90
       };
     } else {
+      window.scrollTo(0, 0);
+
       return {
         x: 0,
         y: 0

@@ -5,16 +5,16 @@
       class="form-field__input"
       :type="data.type"
       :placeholder="data.placeholder"
-      @focus="$emit('focus')"
+      @focus="emit('focus')"
       :model-value="data.value"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="emit('update:modelValue', $event.target.value)"
     />
     <AppSelect
       v-else-if="data.element === 'select'"
       :list="data.options"
-      @change="$emit('update:modelValue', $event)"
+      @change="emit('update:modelValue', $event)"
       :value="data.value"
-      @focus="$emit('focus')"
+      @focus="emit('focus')"
     />
     <span class="form-field__error" :class="{ 'form-field__error--md-absolute': errorAbsolute }">{{
       data.showErrorText
@@ -39,7 +39,7 @@ defineProps({
     default: false
   }
 });
-defineEmits(['focus', 'update:modelValue']);
+const emit = defineEmits(['focus', 'update:modelValue']);
 </script>
 
 <style lang="less" scoped>
