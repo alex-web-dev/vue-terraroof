@@ -1,22 +1,19 @@
 <template>
-  <div class="callback main__callback">
+  <div class="data-section">
     <div class="container">
-      <div class="callback__content">
-        <div class="callback__info">
-          <h2 class="title2 callback__title">Оставьте заявку, и мы свяжемся с&nbsp;Вами!</h2>
-        </div>
+      <div class="data-section__content">
         <AppForm
-          class="callback__form"
+          class="data-section__form"
           :data="formData"
-          :submit-modifiers="submitModifiers"
+          :title-center="true"
+          submit-text="Продолжить"
+          :show-modal="false"
           @form-submit="formSubmit"
           @focus-field="clearError"
           @update-field="updateField"
           @close-message="formData.isSent = false"
         >
-          <template #title>
-            <slot name="formTitle"></slot>
-          </template>
+          <template #title>Данные получателя</template>
         </AppForm>
       </div>
     </div>
@@ -28,29 +25,15 @@ import { reactive } from 'vue';
 import AppForm from '@/components/AppForm.vue';
 import { formValidate, clearError, clearValues } from '@/hooks/form';
 
-defineProps({
-  submitModifiers: {
-    type: Array,
-    default: null
-  }
-});
-
+const emit = defineEmits('formSend');
 const formData = reactive({
   isSent: false,
   items: [
     {
       element: 'input',
       value: '',
-      placeholder: 'Ваше имя',
-      type: 'text',
-      showErrorText: null,
-      validation: [{ type: 'required', errorText: 'Поле имя не может быть пустым' }],
-      isError: false
-    },
-    {
-      element: 'input',
-      value: '',
-      placeholder: 'Город',
+      label: 'Город',
+      id: 'cart-form-city',
       type: 'text',
       showErrorText: null,
       validation: [{ type: 'required', errorText: 'Поле город не может быть пустым' }],
@@ -59,7 +42,28 @@ const formData = reactive({
     {
       element: 'input',
       value: '',
-      placeholder: 'Телефон',
+      label: 'Улица, дом',
+      id: 'cart-form-street',
+      type: 'text',
+      showErrorText: null,
+      validation: [{ type: 'required', errorText: 'Поле имя не может быть пустым' }],
+      isError: false
+    },
+    {
+      element: 'input',
+      value: '',
+      label: 'Квартира',
+      id: 'cart-form-flat',
+      type: 'text',
+      showErrorText: null,
+      validation: [{ type: 'required', errorText: 'Поле имя не может быть пустым' }],
+      isError: false
+    },
+    {
+      element: 'input',
+      value: '',
+      label: 'Телефон',
+      id: 'cart-form-phone',
       type: 'text',
       showErrorText: null,
       validation: [
@@ -83,6 +87,7 @@ function formSubmit() {
   if (formValidate(formData)) {
     clearValues(formData.items);
     formData.isSent = true;
+    emit('formSend', formData);
   }
 }
 </script>
@@ -90,73 +95,39 @@ function formSubmit() {
 <style lang="less" scoped>
 @import '@/assets/less/vars.less';
 
-.callback {
+.data-section {
+  padding-top: 70px;
+
   &__content {
     margin-left: auto;
     margin-right: auto;
-    padding: 58px 106px 50px 64px;
-    display: flex;
-    align-items: flex-start;
-    max-width: 1040px;
+    padding: 52px 30px 60px;
+    max-width: 630px;
     background: #ffffff;
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
-    border-radius: 16px;
-  }
-
-  &__info {
-    flex: 1 1 auto;
-  }
-
-  &__title {
-    color: @color-primary;
+    border-radius: 6px;
   }
 
   &__form {
-    flex: 0 0 40%;
-
-    &:not(:first-child) {
-      margin-left: 65px;
-    }
-  }
-
-  @media (max-width: 1240px) {
-    &__content {
-      padding: 48px 80px 45px 55px;
-      max-width: 970px;
-    }
-
-    &__form {
-      flex-basis: 50%;
-    }
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 380px;
   }
 
   @media (max-width: 991px) {
-    &__content {
-      padding: 45px 45px 40px 35px;
-    }
+    padding-top: 60px;
 
-    &__form {
-      flex-basis: 50%;
+    &__content {
+      padding: 42px 24px 50px;
     }
   }
 
   @media (max-width: 767px) {
+    padding-top: 50px;
+
     &__content {
-      margin-left: auto;
-      margin-right: auto;
-      padding: 30px 14px 33px;
-      flex-direction: column;
+      padding: 32px 16px 40px;
       max-width: @content-sm-max-width;
-    }
-
-    &__form {
-      flex: none;
-      width: 100%;
-
-      &:not(:first-child) {
-        margin-top: 14px;
-        margin-left: 0;
-      }
     }
   }
 }

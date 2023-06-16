@@ -1,8 +1,8 @@
 <template>
   <div class="user-nav header__user-nav">
-    <a class="user-nav__link" href="#">
+    <RouterLink class="user-nav__link" :to="{ name: 'cart' }">
       <img src="@/assets/img/icons/cart.svg" alt="" />
-    </a>
+    </RouterLink>
     <a class="user-nav__link" href="#">
       <img src="@/assets/img/icons/user.svg" alt="" />
     </a>

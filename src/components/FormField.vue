@@ -1,8 +1,10 @@
 <template>
   <div class="form-field" :class="{ 'form-field--error': data.isError }" :key="data">
+    <label class="form-field__label" :for="data.id">{{ data.label }}</label>
     <AppInput
       v-if="data.element === 'input'"
       class="form-field__input"
+      :id="data.id"
       :type="data.type"
       :placeholder="data.placeholder"
       @focus="emit('focus')"
@@ -47,6 +49,12 @@ const emit = defineEmits(['focus', 'update:modelValue']);
 
 .form-field {
   position: relative;
+
+  &__label {
+    margin-bottom: 8px;
+    display: block;
+    line-height: 1.375;
+  }
 
   &__input {
     width: 100%;

@@ -38,7 +38,7 @@ watch(
     }
   }
 );
-const typeClass = ref(props.type ? `modal--${props.type}` : null);
+const typeClass = ref(props.type ? `modal--${props.type}` : '');
 </script>
 
 <style lang="less">

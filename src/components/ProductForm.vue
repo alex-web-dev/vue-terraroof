@@ -1,5 +1,5 @@
 <template>
-  <form class="product-form__form" autocomplete="off">
+  <form class="product-form__form" autocomplete="off" @submit.prevent="addToCart(info.id, count)">
     <h1 class="title4 product-form__title">{{ info.name }}</h1>
     <div class="product-form__meta">
       <div class="product-form__meta-list">
@@ -41,21 +41,17 @@
     <div class="product-form__buy">
       <div class="product-form__price">
         <span v-if="info.priceOld" class="product-form__price-old">
-          <span class="product-form__price-old-value">{{ info.priceOld * counter }}</span>
+          <span class="product-form__price-old-value">{{ info.priceOld * count }}</span>
         </span>
         <span class="product-form__price-new">
-          <span class="product-form__price-new-value">{{ info.price * counter }}</span>
+          <span class="product-form__price-new-value">{{ info.price * count }}</span>
           тг
         </span>
       </div>
       <div class="product-form__buy-footer">
-        <AppCounter
-          class="product-form__counter"
-          :value="counter"
-          @update:value="counter = $event"
-        />
+        <AppCounter class="product-form__counter" :value="count" @update:value="count = $event" />
         <input type="hidden" :value="info.id" />
-        <a class="btn product-form__buy-btn" href="#">Добавить в корзину</a>
+        <button class="btn product-form__buy-btn">Добавить в корзину</button>
       </div>
     </div>
   </form>
@@ -64,8 +60,12 @@
 <script setup>
 import CheckboxColor from '@/components/CheckboxColor.vue';
 import AppCounter from '@/components/AppCounter.vue';
+import { useCart } from '@/stores/cart';
+import { useMessages } from '@/stores/messages';
 import { ref } from 'vue';
 
+const storeCart = useCart();
+const storeMessages = useMessages();
 const emit = defineEmits(['changeColor']);
 defineProps({
   info: {
@@ -77,7 +77,15 @@ defineProps({
     default: null
   }
 });
-const counter = ref(1);
+const count = ref(1);
+
+function addToCart(id, count) {
+  storeCart.addItem(id, count);
+  storeMessages.addMessage({
+    type: 'success',
+    text: 'Товар добавлен в корзину'
+  });
+}
 </script>
 
 <style lang="less" scoped>
@@ -229,6 +237,24 @@ const counter = ref(1);
 
     &__price {
       margin-top: 24px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    &__buy {
+      &-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      &-btn {
+        margin-top: 18px;
+        width: 100%;
+
+        &:not(:first-child) {
+          margin-left: 0;
+        }
+      }
     }
   }
 

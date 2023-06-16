@@ -12,6 +12,24 @@
   opacity: 0;
 }
 
+.fade-left-move {
+  transition: transform 0.4s;
+}
+
+.fade-left-enter-active,
+.fade-left-leave-active {
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.fade-left-enter-from,
+.fade-left-leave-to {
+  opacity: 0;
+}
+
+.fade-left-leave-to {
+  transform: translateX(-15px);
+}
+
 @keyframes pulse-small {
   0% {
     box-shadow: 0 0 0 0px rgba(116, 228, 116, 0.5);

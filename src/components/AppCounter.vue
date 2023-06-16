@@ -1,5 +1,5 @@
 <template>
-  <div class="counter">
+  <div class="counter" :class="{ 'counter--high': size === 'high' }">
     <button type="button" class="counter__minus" @click="updateValue(-1)">-</button>
     <input
       class="counter__input"
@@ -26,6 +26,10 @@ const props = defineProps({
   readonly: {
     type: Boolean,
     default: true
+  },
+  size: {
+    type: String,
+    default: null
   }
 });
 

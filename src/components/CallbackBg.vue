@@ -15,6 +15,7 @@
             line="row"
             :data="formData"
             :error-absolute="true"
+            :submit-modifiers="['border']"
             @form-submit="formSubmit"
             @focus-field="clearError"
             @update-field="updateField"

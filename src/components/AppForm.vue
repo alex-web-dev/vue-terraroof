@@ -1,6 +1,10 @@
 <template>
   <form class="callback-form" autocomplete="off" @submit.prevent="emit('formSubmit')">
-    <h3 v-if="slots.title" class="title5 title5--sm-white callback-form__title">
+    <h3
+      v-if="slots.title"
+      class="title5 title5--sm-white callback-form__title"
+      :class="{ 'title5--center': titleCenter }"
+    >
       <slot name="title"></slot>
     </h3>
     <div class="callback-form__main" :class="[mainLineClass]">
@@ -14,11 +18,17 @@
         @focus="emit('focusField', item)"
         @update:model-value="emit('updateField', index, $event)"
       />
-      <button class="btn btn--border btn--sm-primary callback-form__btn">Отправить</button>
+      <button class="btn btn--sm-primary callback-form__btn" :class="submitClasses">
+        Отправить
+      </button>
     </div>
     <Teleport to="body">
       <Transition name="fade">
-        <ModalMessage :open="data.isSent" type="message" @close="emit('closeMessage')" />
+        <ModalMessage
+          :open="data.isSent && showModal"
+          type="message"
+          @close="emit('closeMessage')"
+        />
       </Transition>
     </Teleport>
   </form>
@@ -27,16 +37,11 @@
 <script setup>
 import FormField from '@/components/FormField.vue';
 import ModalMessage from '@/components/ModalMessage.vue';
-
-import { useSlots } from 'vue';
+import { useSlots, ref, computed } from 'vue';
 
 const slots = useSlots();
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: null
-  },
   line: {
     type: String,
     default: null
@@ -48,11 +53,35 @@ const props = defineProps({
   errorAbsolute: {
     type: Boolean,
     default: false
+  },
+  titleCenter: {
+    type: Boolean,
+    default: false
+  },
+  submitText: {
+    type: String,
+    default: 'Отправить'
+  },
+  submitModifiers: {
+    type: Array,
+    default: null
+  },
+  showModal: {
+    type: Boolean,
+    default: true
   }
 });
 const emit = defineEmits(['formSubmit', 'focusField', 'updateField', 'closeMessage']);
+const mainLineClass = ref(props.line === 'row' ? `callback-form__main--row` : null);
+const submitClasses = computed(() => {
+  if (!props.submitModifiers) {
+    return null;
+  }
 
-const mainLineClass = props.line === 'row' ? `callback-form__main--row` : null;
+  return props.submitModifiers.map((type) => {
+    return `btn--${type}`;
+  });
+});
 </script>
 
 <style lang="less" scoped>

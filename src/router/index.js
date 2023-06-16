@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import CatalogView from '@/views/CatalogView.vue';
 import ProductAbout from '@/views/ProductAbout.vue';
+import CartView from '@/views/CartView.vue';
 
 const DEFAULT_TITLE = 'Terraroof';
 
@@ -29,6 +30,15 @@ const routes = [
     component: ProductAbout,
     meta: {
       title: `${DEFAULT_TITLE} - Подробнее о товаре`,
+      layout: 'main'
+    }
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartView,
+    meta: {
+      title: `${DEFAULT_TITLE} - Корзина`,
       layout: 'main'
     }
   }

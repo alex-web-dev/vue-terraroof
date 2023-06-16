@@ -21,7 +21,9 @@
           тг
         </span>
       </div>
-      <RouterLink class="btn btn--border product-card__btn product-card__btn--mt-32" to="#callback"
+      <RouterLink
+        class="btn btn--border product-card__btn product-card__btn--mt-32"
+        :to="{ name: 'product', params: { id: data.id } }"
         >Заказать</RouterLink
       >
     </div>

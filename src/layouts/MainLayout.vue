@@ -20,6 +20,10 @@
     </Transition>
   </Teleport>
 
+  <Teleport to="body">
+    <TheMessages></TheMessages>
+  </Teleport>
+
   <CallbackBox link="https://www.whatsapp.com/" />
 </template>
 
@@ -29,6 +33,7 @@ import ModalCallback from '@/components/ModalCallback.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import ModalTime from '@/components/ModalTime.vue';
+import TheMessages from '@/components/TheMessages.vue';
 import { useModals } from '@/stores/modals';
 
 const storeModals = useModals();

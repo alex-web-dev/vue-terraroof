@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <AppCatalog />
-    <AppCallback id="callback" />
+    <AppCallback id="callback" :submit-modifiers="['border', 'sm-primary']" />
   </main>
 </template>
 
