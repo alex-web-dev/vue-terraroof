@@ -77,7 +77,7 @@
           <span class="menu__contact-text">Заказать расчет</span>
         </a>
         <a class="menu__contact" href="tel:+77776333330">
-          <div class="menu__contact-icon menu__contact-icon--second">
+          <div class="menu__contact-icon">
             <img src="@/assets/img/icons/phone.svg" alt="" />
           </div>
           <span class="menu__contact-text menu__contact-text--gray">+7 (777) 633 33 30</span>
@@ -426,7 +426,7 @@ function deactivateItem(item) {
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.375;
       border-top: 1px solid #e0e5ed;
 

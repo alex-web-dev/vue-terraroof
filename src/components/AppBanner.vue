@@ -3,12 +3,7 @@
     <div class="banner__content">
       <div class="banner__info">
         <h1 class="title1 banner__title" data-aos="fade-in" data-aos-duration="1200">TERRAROOF.</h1>
-        <h2
-          class="title2 banner__subtitle"
-          data-aos="fade-in"
-          data-aos-delay="600"
-          data-aos-duration="1200"
-        >
+        <h2 class="title2 banner__subtitle" data-aos="fade-in" data-aos-delay="600" data-aos-duration="1200">
           Кровля для самых требовательных
         </h2>
         <div class="banner__features">
@@ -22,15 +17,9 @@
         </div>
         <RouterLink class="btn banner__btn" :to="{ name: 'catalog' }">Каталог продукции</RouterLink>
       </div>
-      <Swiper
-        :modules="modules"
-        :space-between="swiperOptions.spaceBetween"
-        :loop="swiperOptions.loop"
-        :speed="swiperOptions.speed"
-        :pagination="swiperOptions.pagination"
-        :autoplay="swiperOptions.autoplay"
-        class="banner__slider"
-      >
+      <Swiper :modules="modules" :space-between="swiperOptions.spaceBetween" :loop="swiperOptions.loop"
+        :speed="swiperOptions.speed" :pagination="swiperOptions.pagination" :autoplay="swiperOptions.autoplay"
+        class="banner__slider">
         <SwiperSlide class="banner__slide" v-for="img in sliderImages" :key="img">
           <img :src="getImage(img)" alt="" />
         </SwiperSlide>
@@ -164,9 +153,24 @@ const sliderImages = reactive([
     align-self: flex-start;
     border-radius: 16px;
     overflow: hidden;
+  }
+
+
+  &__slide {
+    position: relative;
+    padding-top: 91.75%;
+    height: auto;
 
     img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 

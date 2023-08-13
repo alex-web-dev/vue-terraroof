@@ -7,12 +7,14 @@ export const useProducts = defineStore('products', () => {
       id: 1,
       category_id: 2,
       img: 'products/1.jpg',
+      companyImg: 'companies/4.png',
       name: 'Галлеан',
       text: 'Модель Галлеан поставляется не с немецкого производства, а с французского завода компаний BRAAS. Основным отличием является ее высокий средиземноморский профиль, античное покрытие.',
       priceOld: 17500,
       price: 15200,
       recommendPercent: 95,
       ordersCount: 10,
+      available: true,
       tags: [{ type: 'sale', text: 'акция' }],
       details: [
         {
@@ -77,12 +79,14 @@ export const useProducts = defineStore('products', () => {
       id: 2,
       category_id: 3,
       img: 'products/2.jpg',
+      companyImg: 'companies/3.png',
       name: 'Коллекция Bari',
       text: 'Черепица Ребен Бари, обладающая уникальными природными характеристиками, соединила в себе все четыре стихии – воду, землю, воздух и огонь',
       priceOld: 18400,
       price: 16700,
       recommendPercent: 92,
       ordersCount: 12,
+      available: true,
       tags: [{ type: 'sale', text: 'акция' }],
       details: [
         {
@@ -147,11 +151,13 @@ export const useProducts = defineStore('products', () => {
       id: 3,
       category_id: 5,
       img: 'products/3.jpg',
+      companyImg: 'companies/1.png',
       name: 'Metrotile',
       text: 'Композитная черепица Metrotile – кровельный материал, ставший настоящей классикой среди архитекторов и владельцев домов в Новой  Зеландии. Metrotile позволяет реализовать самые смелые проекты устройства кровли.',
       price: 11200,
       recommendPercent: 96,
       ordersCount: 22,
+      available: true,
       details: [
         {
           name: 'Описание',
@@ -215,11 +221,13 @@ export const useProducts = defineStore('products', () => {
       id: 4,
       category_id: 6,
       img: 'products/4.jpg',
+      companyImg: 'companies/2.png',
       name: 'Queentile Shake',
       text: 'Вы создадите особую элегантность и уникальную привлекательность дома, а имитация структуры дерева и выдержанные тона подчеркнут образ многовековой истории.',
       price: 14500,
       recommendPercent: 97,
       ordersCount: 27,
+      available: true,
       details: [
         {
           name: 'Описание',
@@ -283,12 +291,14 @@ export const useProducts = defineStore('products', () => {
       id: 5,
       category_id: 8,
       img: 'products/5.jpg',
+      companyImg: 'companies/3.png',
       name: 'Belmont',
       text: 'Линия гибкой черепицы Belmont от компании CertainTeed это многослойная конструкция из смешанных цветов – ярких пятен и контрастных теней.',
       priceOld: 18600,
       price: 15900,
       recommendPercent: 94,
       ordersCount: 18,
+      available: true,
       tags: [{ type: 'sale', text: 'акция' }],
       details: [
         {
@@ -353,11 +363,13 @@ export const useProducts = defineStore('products', () => {
       id: 6,
       category_id: 9,
       img: 'products/6.jpg',
+      companyImg: 'companies/4.png',
       name: 'Коллекция Camelot II',
       text: 'Кровля данной серии придаст любому дому аристократичности и изысканности. Структура гонтов серии Camelot II великолепно повторяет вид натурального сланца, а угловая подрезка лепестков и линии тени создают максимальный эффект объема кровли.',
       price: 12800,
       recommendPercent: 93,
       ordersCount: 32,
+      available: true,
       details: [
         {
           name: 'Описание',
@@ -421,12 +433,14 @@ export const useProducts = defineStore('products', () => {
       id: 7,
       category_id: 11,
       img: 'products/7.jpg',
+      companyImg: 'companies/2.png',
       name: 'Металлическая модульная черепица Гётеборг',
       text: 'Модульная черепица AQUASYSTEM с профилем Гётеборг имеет симметричный профиль. Прогиб волны — горизонтальный, на гребне выполнены декоративные продольные канавки. Высота ступеньки увеличена до 30 мм, что повышает жесткость кровельного покрытия, делает его более рельефным, объемным.',
       priceOld: 18900,
       price: 16900,
       recommendPercent: 98,
       ordersCount: 37,
+      available: true,
       tags: [{ type: 'sale', text: 'акция' }],
       details: [
         {
@@ -491,12 +505,14 @@ export const useProducts = defineStore('products', () => {
       id: 8,
       category_id: 13,
       img: 'products/8.jpg',
+      companyImg: 'companies/1.png',
       name: 'Haussman Biber',
       text: 'Ассортимент медной черепицы Haussman насчитывает пять видов различных форм. Пальма первенства безоговорочно отдана старейшему виду классической черепице «Biber» — бобровый хвост.',
       priceOld: 16000,
       price: 14500,
       recommendPercent: 90,
       ordersCount: 16,
+      available: true,
       tags: [{ type: 'sale', text: 'акция' }],
       details: [
         {
@@ -561,11 +577,13 @@ export const useProducts = defineStore('products', () => {
       id: 9,
       category_id: 14,
       img: 'products/9.jpg',
+      companyImg: 'companies/4.png',
       name: 'Лежачий двойной или одинарный',
       text: 'Фальцевая кровля имеет ребра – горизонтальные закрепляют лежачим методом, а продольные стоячим. Специалисты рекомендуют использовать самоклеящуюся ленту, для более надежной герметизации.',
       price: 13400,
       recommendPercent: 91,
       ordersCount: 15,
+      available: true,
       details: [
         {
           name: 'Описание',
@@ -629,12 +647,14 @@ export const useProducts = defineStore('products', () => {
       id: 10,
       category_id: 16,
       img: 'products/10.jpg',
+      companyImg: 'companies/1.png',
       name: 'Cupa Восьмиугольники',
       text: 'Под понятием декоративных кладок объединяют различные варианты техники кладки, особенная привлекательность и богатство которых достигается, в частности, при облицовке фасадов.',
       priceOld: 13700,
       price: 12500,
       recommendPercent: 93,
       ordersCount: 18,
+      available: true,
       tags: [{ type: 'sale', text: 'акция' }],
       details: [
         {

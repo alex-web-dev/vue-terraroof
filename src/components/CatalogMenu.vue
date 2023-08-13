@@ -1,6 +1,5 @@
 <template>
   <div class="catalog-menu" ref="$catalogMenu">
-    <!-- <Simplebar> -->
     <div class="catalog-menu__content">
       <Simplebar>
         <div class="catalog-menu__main">
@@ -24,7 +23,6 @@
         </div>
       </Simplebar>
     </div>
-    <!-- </Simplebar> -->
   </div>
 </template>
 
@@ -87,6 +85,10 @@ defineProps({
 
   &__main {
     padding: 48px 65px 25px 62px;
+  }
+
+  &__content.simplebar-scrollable-y &__scroll-icon {
+    display: block;
   }
 
   &__title {
@@ -182,6 +184,17 @@ defineProps({
     }
   }
 
+  &__scroll-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 40px;
+    max-height: 60px;
+    object-fit: contain;
+    display: none;
+  }
+
   @media (max-width: 1240px) {
     &__main {
       padding: 32px 32px 24px 32px;
@@ -210,6 +223,12 @@ defineProps({
         left: 18px;
         top: 18px;
       }
+    }
+
+    &__scroll-icon {
+      right: 8px;
+      max-width: 25px;
+      max-height: 38px;
     }
   }
 

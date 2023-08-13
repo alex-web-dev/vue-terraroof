@@ -1,9 +1,7 @@
 <template>
   <div class="product-card" :class="{ 'product-card--preview': type === 'preview' }">
-    <RouterLink
-      class="product-card__img-box product-card__img-box--large"
-      :to="{ name: 'product', params: { id: data.id } }"
-    >
+    <RouterLink class="product-card__img-box product-card__img-box--large"
+      :to="{ name: 'product', params: { id: data.id } }">
       <img class="product-card__img" :src="getImage(data.img)" alt="" />
       <AppTags class="product-card__tags" v-if="data.tags" list-position="end" :list="data.tags" />
     </RouterLink>
@@ -11,6 +9,10 @@
       <h3 class="title5 product-card__name">
         <RouterLink :to="{ name: 'product', params: { id: data.id } }">{{ data.name }}</RouterLink>
       </h3>
+      <div class="product-card__meta">
+        <div class="text text--gray product-card__status">{{ available }}</div>
+        <img class="product-card__logo" :src="getImage(data.companyImg)" alt="">
+      </div>
       <p class="text text--gray product-card__text">{{ data.text }}</p>
       <div class="product-card__price">
         <span class="product-card__price-old" v-if="data.priceOld">
@@ -21,11 +23,8 @@
           тг
         </span>
       </div>
-      <RouterLink
-        class="btn btn--border product-card__btn product-card__btn--mt-32"
-        :to="{ name: 'product', params: { id: data.id } }"
-        >Заказать</RouterLink
-      >
+      <RouterLink class="btn btn--border product-card__btn" :to="{ name: 'product', params: { id: data.id } }">Заказать
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -34,8 +33,9 @@
 import { getImage } from '@/hooks/img';
 import AppTags from '@/components/AppTags.vue';
 import { RouterLink } from 'vue-router';
+import { computed } from 'vue';
 
-defineProps({
+const props = defineProps({
   type: {
     type: String,
     default: null
@@ -44,6 +44,10 @@ defineProps({
     type: Object,
     required: true
   }
+});
+
+const available = computed(() => {
+  return props.data.available ? 'В наличии' : 'Нет в наличии';
 });
 </script>
 
@@ -95,12 +99,23 @@ defineProps({
     max-width: 290px;
   }
 
-  &__status {
-    margin-top: 4px;
-    margin-bottom: 8px;
+  &__meta {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    margin-left: 10px;
+    flex: 0 0 auto;
+    max-width: 77px;
+    max-height: 22px;
+    object-fit: contain;
   }
 
   &__colors {
+    margin-top: 8px;
     margin-bottom: 18px;
 
     &-list {
@@ -183,6 +198,16 @@ defineProps({
 
     &__info {
       padding: 14px 14px 21px;
+    }
+
+
+    &__logo {
+      max-width: 64px;
+      max-height: 18px;
+    }
+
+    &__meta {
+      margin-bottom: 0;
     }
 
     &__text {

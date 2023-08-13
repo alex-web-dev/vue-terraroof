@@ -1,5 +1,15 @@
 <template>
+  <ImaskInput
+    v-if="type === 'mask'"
+    :value="modelValue"
+    @input="maskInput"
+    class="input"
+    :mask="mask"
+    :unmask="true"
+    :placeholder="placeholder"
+  />
   <input
+    v-else
     class="input"
     :type="type"
     :placeholder="placeholder"
@@ -10,6 +20,8 @@
 </template>
 
 <script setup>
+import { IMaskComponent as ImaskInput } from 'vue-imask';
+const emit = defineEmits('update:modelValue');
 defineProps({
   modelValue: {
     type: String,
@@ -22,8 +34,16 @@ defineProps({
   placeholder: {
     type: String,
     default: ''
+  },
+  mask: {
+    type: String || Number,
+    default: ''
   }
 });
+
+function maskInput(val) {
+  emit('update:modelValue', val.target.value)
+}
 </script>
 
 <style lang="less" scoped>

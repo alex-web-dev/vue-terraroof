@@ -90,8 +90,8 @@ const emit = defineEmits(['update:selected']);
   @media (max-width: 767px) {
     &__switch {
       img {
-        width: 34px;
-        height: 34px;
+        width: 30px;
+        height: 30px;
       }
     }
 

@@ -161,7 +161,7 @@ const storeModals = useModals();
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 479px) {
     &__img {
       max-height: 55vw;
     }

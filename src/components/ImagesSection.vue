@@ -4,35 +4,16 @@
       <div class="images-section__content">
         <h2 class="title2 images-section__title">Мы сделаем Ваш дом объектом восхищения</h2>
         <div class="images-section__slider-box">
-          <Swiper
-            class="images-section__slider swiper"
-            wrapper-class="images-section__slider-wrapper"
-            :modules="modules"
-            :breakpoints="swiperOptions.breakpoints"
-            :space-between="swiperOptions.spaceBetween"
-            :speed="swiperOptions.speed"
-            :pagination="swiperOptions.pagination"
-          >
-            <SwiperSlide
-              class="images-section__slide swiper-slide"
-              v-for="(image, index) in images.slice(0, showImagesLimit)"
-              :key="image"
-            >
-              <Swiper
-                class="swiper images-section__inner-slider"
-                :modules="[EffectFade]"
-                effect="fade"
-                :initial-slide="randomArray[index]"
-                :allow-touch-move="false"
-                :touch-move-stop-propagation="true"
-                :fade-effect="{ crossFade: true }"
-                @swiper="onInnerSwiper"
-              >
-                <SwiperSlide
-                  class="swiper-slide images-section__inner-slide"
-                  v-for="innerImage in images"
-                  :key="innerImage"
-                >
+          <Swiper class="images-section__slider swiper" wrapper-class="images-section__slider-wrapper" :modules="modules"
+            :breakpoints="swiperOptions.breakpoints" :space-between="swiperOptions.spaceBetween"
+            :speed="swiperOptions.speed" :pagination="swiperOptions.pagination">
+            <SwiperSlide class="images-section__slide swiper-slide"
+              v-for="(image, index) in images.slice(0, showImagesLimit)" :key="image">
+              <Swiper class="swiper images-section__inner-slider" :modules="[EffectFade]" effect="fade"
+                :initial-slide="randomArray[index]" :allow-touch-move="false" :touch-move-stop-propagation="true"
+                :fade-effect="{ crossFade: true }" @swiper="onInnerSwiper">
+                <SwiperSlide class="swiper-slide images-section__inner-slide" v-for="innerImage in images"
+                  :key="innerImage">
                   <img class="images-section__img" :src="getImage(innerImage)" alt="" />
                 </SwiperSlide>
               </Swiper>
@@ -194,7 +175,7 @@ onMounted(() => {
     overflow: hidden;
 
     span {
-      max-width: 230px;
+      max-width: 310px;
       z-index: 1;
 
       &:before {
@@ -345,9 +326,15 @@ onMounted(() => {
       text-transform: uppercase;
       font-size: 16px;
       font-weight: 600;
+      text-align: left;
+
+      span {
+        max-width: 270px;
+      }
 
       &:after {
         margin-left: 15px;
+        flex: 0 0 auto;
         .pseudo-icon('../img/icons/arrow-right-up.svg', 14px, 14px);
       }
     }

@@ -64,13 +64,14 @@ const formData = reactive({
       value: '',
       label: 'Телефон',
       id: 'cart-form-phone',
-      type: 'text',
+      type: 'mask',
+      mask: '+{7}(000)000-00-00',
       showErrorText: null,
       validation: [
         { type: 'required', errorText: 'Поле телефон не может быть пустым' },
         {
           type: 'mask',
-          value: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im,
+          value: /(?:\+|\d)[\d\-\(\) ]{14,}\d/g,
           errorText: 'Некорректный номер телефона'
         }
       ],

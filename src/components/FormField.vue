@@ -6,6 +6,7 @@
       class="form-field__input"
       :id="data.id"
       :type="data.type"
+      :mask="data.mask"
       :placeholder="data.placeholder"
       @focus="emit('focus')"
       :model-value="data.value"

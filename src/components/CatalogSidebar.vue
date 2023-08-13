@@ -176,6 +176,7 @@ const emit = defineEmits(['close']);
     background: #fff;
     opacity: 0;
     visibility: hidden;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
     transition: opacity 0.4s, visibility 0.4s, transform 0.4s;
 
     &__content {

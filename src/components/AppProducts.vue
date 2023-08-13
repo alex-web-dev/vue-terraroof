@@ -1,13 +1,7 @@
 <template>
   <div class="products">
     <div class="products__list">
-      <ProductCard
-        class="products__item"
-        v-for="product in products"
-        :data="product"
-        :type="type"
-        :key="product"
-      />
+      <ProductCard class="products__item" v-for="product in products" :data="product" :type="type" :key="product" />
     </div>
   </div>
 </template>
@@ -63,6 +57,17 @@ defineProps({
     }
   }
 
+  &__info {
+    margin-top: 72px;
+    padding: 30px;
+    border-radius: 30px;
+    background-color: @color-primary;
+
+    &-item {
+      padding: 30px;
+    }
+  }
+
   @media (max-width: 1240px) {
     &__title {
       margin-bottom: 32px;
@@ -70,6 +75,16 @@ defineProps({
 
     &__subtitle {
       margin-bottom: 20px;
+    }
+
+    &__info {
+      margin-top: 52px;
+      padding: 24px;
+      border-radius: 24px;
+
+      &-item {
+        padding: 24px;
+      }
     }
   }
 
@@ -113,6 +128,21 @@ defineProps({
 
     &__item {
       margin-top: 18px;
+    }
+
+    &__info {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 18px;
+
+      &-item {
+        padding: 18px;
+      }
+    }
+  }
+
+  @media (max-width: 479px) {
+    &__item {
       width: calc(100% - 20px);
     }
   }

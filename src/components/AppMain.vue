@@ -47,7 +47,6 @@
 
   &--home {
     padding-top: calc(88px + 24px);
-    padding-bottom: 194px;
   }
 
   @media (max-width: 1240px) {
@@ -86,7 +85,7 @@
     }
 
     &--home {
-      padding-bottom: 110px;
+      padding-bottom: 90px;
     }
   }
 

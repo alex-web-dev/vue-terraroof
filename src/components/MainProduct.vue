@@ -141,7 +141,7 @@ import TextDropdown from './TextDropdown.vue';
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 479px) {
     &__tags {
       top: 164px;
     }

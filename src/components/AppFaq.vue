@@ -85,111 +85,33 @@ const faqList = ref([
   }
 
   &__item {
-    padding: 19px 24px;
-    background-color: #fff;
-    border-radius: 16px;
-
     &:not(:first-child) {
       margin-top: 14px;
-    }
-
-    :deep(&-header) {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-align: left;
-      font-size: 24px;
-      font-weight: 600;
-      line-height: 1.375;
-    }
-
-    &-header.accordion__btn--active &-arrow {
-      &:before {
-        transform: rotate(90deg);
-      }
-    }
-
-    &-arrow {
-      margin-left: 8px;
-      width: 42px;
-      height: 42px;
-      flex: 0 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #e4f5ff;
-      border-radius: 50%;
-
-      &:before {
-        .pseudo-icon('../img/icons/right.svg', 9px, 20px);
-        transition: transform 0.4s;
-      }
-    }
-
-    :deep(&-main) {
-      padding: 10px 60px 18px 0;
-    }
-
-    &-text {
-      line-height: 1.375;
     }
   }
 
   @media (max-width: 1240px) {
     padding: 65px 0 75px;
 
-    &__info {
+    &__info  {
       flex-basis: 370px;
     }
 
     &__item {
-      padding: 17px 22px;
-
       &:not(:first-child) {
         margin-top: 12px;
-      }
-
-      &-header {
-        font-size: 22px;
-      }
-
-      &-arrow {
-        width: 38px;
-        height: 38px;
-
-        &:before {
-          width: 8px;
-          height: 18px;
-        }
-      }
-
-      &-main {
-        padding-right: 40px;
-        padding-bottom: 12px;
       }
     }
   }
 
   @media (max-width: 1140px) {
-    &__info {
+    &__info  {
       flex-basis: 310px;
     }
   }
 
   @media (max-width: 991px) {
     padding: 55px 0 60px;
-
-    &__item {
-      &-header {
-        font-size: 18px;
-      }
-
-      &-arrow {
-        width: 36px;
-        height: 36px;
-      }
-    }
   }
 
   @media (max-width: 767px) {
@@ -213,36 +135,11 @@ const faqList = ref([
     }
 
     &__item {
-      padding: 12px 14px;
-
       &:not(:first-child) {
         margin-top: 8px;
       }
-
-      &-header {
-        font-size: 16px;
-      }
-
-      &-arrow {
-        width: 32px;
-        height: 32px;
-
-        &:before {
-          width: 7px;
-          height: 15px;
-        }
-      }
-
-      &-header.accordion__btn--active &-arrow {
-        &:before {
-          transform: rotate(90deg) translateX(1px);
-        }
-      }
-
-      &-main {
-        padding: 8px 0 7px;
-      }
     }
+    
   }
 }
 </style>
