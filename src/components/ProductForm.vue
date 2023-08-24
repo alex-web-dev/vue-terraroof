@@ -40,6 +40,7 @@
     </div>
     <div class="product-form__buy">
       <div class="product-form__price">
+        <div class="product-form__label">Цена:</div>
         <span v-if="info.priceOld" class="product-form__price-old">
           <span class="product-form__price-old-value">{{ info.priceOld * count }}</span>
         </span>
@@ -216,7 +217,7 @@ function addToCart(id, count) {
     font-weight: 600;
 
     &-old {
-      margin-right: 24px;
+      margin-right: 16px;
       color: @color-gray;
       text-decoration: line-through;
     }

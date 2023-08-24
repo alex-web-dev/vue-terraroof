@@ -26,8 +26,8 @@
 </template>
 
 <script setup>
-import AppTags from './AppTags.vue';
-import TextDropdown from './TextDropdown.vue';
+import AppTags from '@/components/AppTags.vue';
+import TextDropdown from '@/components/TextDropdown.vue';
 </script>
 
 <style lang="less" scoped>

@@ -27,7 +27,7 @@ defineProps({
   }
 });
 
-const emit = defineEmits('update:checked');
+const emit = defineEmits(['update:checked']);
 </script>
 
 <style lang="less" scoped>

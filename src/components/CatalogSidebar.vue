@@ -42,7 +42,7 @@
 
 <script setup>
 import { getImage } from '@/hooks/img';
-import AppCheckbox from './AppCheckbox.vue';
+import AppCheckbox from '@/components/AppCheckbox.vue';
 
 defineProps({
   open: {

@@ -3,7 +3,12 @@
     <div class="banner__content">
       <div class="banner__info">
         <h1 class="title1 banner__title" data-aos="fade-in" data-aos-duration="1200">TERRAROOF.</h1>
-        <h2 class="title2 banner__subtitle" data-aos="fade-in" data-aos-delay="600" data-aos-duration="1200">
+        <h2
+          class="title2 banner__subtitle"
+          data-aos="fade-in"
+          data-aos-delay="600"
+          data-aos-duration="1200"
+        >
           Кровля для самых требовательных
         </h2>
         <div class="banner__features">
@@ -17,25 +22,32 @@
         </div>
         <RouterLink class="btn banner__btn" :to="{ name: 'catalog' }">Каталог продукции</RouterLink>
       </div>
-      <Swiper :modules="modules" :space-between="swiperOptions.spaceBetween" :loop="swiperOptions.loop"
-        :speed="swiperOptions.speed" :pagination="swiperOptions.pagination" :autoplay="swiperOptions.autoplay"
-        class="banner__slider">
-        <SwiperSlide class="banner__slide" v-for="img in sliderImages" :key="img">
-          <img :src="getImage(img)" alt="" />
-        </SwiperSlide>
+      <div class="banner__slider">
+        <swiper-container
+          :modules="modules"
+          :space-between="swiperOptions.spaceBetween"
+          :loop="swiperOptions.loop"
+          :speed="swiperOptions.speed"
+          :pagination="swiperOptions.pagination"
+          :autoplay="swiperOptions.autoplay"
+        >
+          <swiper-slide class="banner__slide" v-for="img in sliderImages" :key="img">
+            <img :src="getImage(img)" alt="" />
+          </swiper-slide>
+        </swiper-container>
         <div class="banner__pagination"></div>
-      </Swiper>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination, Autoplay } from 'swiper';
-import 'swiper/css';
+import { register } from 'swiper/element';
+import { Pagination, Autoplay } from 'swiper/modules';
 import { getImage } from '@/hooks/img';
-
 import { reactive } from 'vue';
+
+register();
 
 const modules = [Pagination, Autoplay];
 
@@ -68,10 +80,9 @@ const features = reactive([
 ]);
 
 const sliderImages = reactive([
-  'banner-img.jpg',
-  'banner-img.jpg',
-  'banner-img.jpg',
-  'banner-img.jpg'
+  'section-banner/1.jpg',
+  'section-banner/2.jpg',
+  'section-banner/3.jpg'
 ]);
 </script>
 
@@ -149,12 +160,16 @@ const sliderImages = reactive([
   }
 
   &__slider {
+    position: relative;
     flex: 0 0 calc(54% - 12px);
     align-self: flex-start;
     border-radius: 16px;
     overflow: hidden;
-  }
 
+    swiper-container {
+      height: 100%;
+    }
+  }
 
   &__slide {
     position: relative;

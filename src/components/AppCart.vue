@@ -41,7 +41,7 @@ const props = defineProps({
     default: null
   }
 });
-const emit = defineEmits('updateCount', 'removeItem');
+const emit = defineEmits(['updateCount', 'removeItem']);
 const products = computed(() =>
   props.items.map((item) => {
     return {

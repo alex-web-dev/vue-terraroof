@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits('update:value');
+const emit = defineEmits(['update:value']);
 const props = defineProps({
   value: {
     type: Number,

@@ -21,7 +21,7 @@
 
 <script setup>
 import { IMaskComponent as ImaskInput } from 'vue-imask';
-const emit = defineEmits('update:modelValue');
+const emit = defineEmits(['update:modelValue']);
 defineProps({
   modelValue: {
     type: String,

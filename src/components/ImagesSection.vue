@@ -4,30 +4,49 @@
       <div class="images-section__content">
         <h2 class="title2 images-section__title">Мы сделаем Ваш дом объектом восхищения</h2>
         <div class="images-section__slider-box">
-          <Swiper class="images-section__slider swiper" wrapper-class="images-section__slider-wrapper" :modules="modules"
-            :breakpoints="swiperOptions.breakpoints" :space-between="swiperOptions.spaceBetween"
-            :speed="swiperOptions.speed" :pagination="swiperOptions.pagination">
-            <SwiperSlide class="images-section__slide swiper-slide"
-              v-for="(image, index) in images.slice(0, showImagesLimit)" :key="image">
-              <Swiper class="swiper images-section__inner-slider" :modules="[EffectFade]" effect="fade"
-                :initial-slide="randomArray[index]" :allow-touch-move="false" :touch-move-stop-propagation="true"
-                :fade-effect="{ crossFade: true }" @swiper="onInnerSwiper">
-                <SwiperSlide class="swiper-slide images-section__inner-slide" v-for="innerImage in images"
-                  :key="innerImage">
+          <swiper-container
+            class="images-section__slider swiper"
+            :modules="modules"
+            :breakpoints="swiperOptions.breakpoints"
+            :space-between="swiperOptions.spaceBetween"
+            :speed="swiperOptions.speed"
+            :pagination="swiperOptions.pagination"
+          >
+            <swiper-slide
+              class="images-section__slide swiper-slide"
+              v-for="(image, index) in images.slice(0, showImagesLimit)"
+              :key="image"
+            >
+              <swiper-container
+                class="swiper images-section__inner-slider"
+                :modules="[EffectFade]"
+                effect="fade"
+                direction="horizontal"
+                :initial-slide="randomArray[index]"
+                :allow-touch-move="false"
+                :touch-move-stop-propagation="true"
+                :fade-effect="{ crossFade: true }"
+                @_swiper="onInnerSwiper"
+              >
+                <swiper-slide
+                  class="swiper-slide images-section__inner-slide"
+                  v-for="innerImage in images"
+                  :key="innerImage"
+                >
                   <img class="images-section__img" :src="getImage(innerImage)" alt="" />
-                </SwiperSlide>
-              </Swiper>
-            </SwiperSlide>
-            <SwiperSlide class="images-section__slide images-section__slide--btn swiper-slide">
-              <button class="images-section__slide-btn" @click="storeModals.open()">
+                </swiper-slide>
+              </swiper-container>
+            </swiper-slide>
+            <swiper-slide class="images-section__slide images-section__slide--btn swiper-slide">
+              <button class="images-section__slide-btn" @click="storeModals.open('callback')">
                 <span>Подобрать</span>
                 <img src="@/assets/img/icons/logo-blue.svg" alt="" />
               </button>
-            </SwiperSlide>
-          </Swiper>
+            </swiper-slide>
+          </swiper-container>
           <div class="swiper-pagination-bullets--big images-section__pagination"></div>
         </div>
-        <button class="btn images-section__mobile-btn" @click="storeModals.open()">
+        <button class="btn images-section__mobile-btn" @click="storeModals.open('callback')">
           Заказать просчет кровли
         </button>
       </div>
@@ -37,16 +56,17 @@
 
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination, EffectFade } from 'swiper';
+import { register } from 'swiper/element';
+import { Pagination, EffectFade } from 'swiper/modules';
 import { getNumbersArray, shuffleArray } from '@/hooks/array';
 import { getImage } from '@/hooks/img';
 import { useModals } from '@/stores/modals';
 
 import 'swiper/css';
-import 'swiper/css/effect-fade';
-
+import 'swiper/element/css/effect-fade';
 const storeModals = useModals();
+
+register();
 
 const modules = [Pagination, EffectFade];
 const swiperOptions = {
@@ -83,8 +103,9 @@ const images = reactive([
   'house-images/9.jpg',
   'house-images/10.jpg'
 ]);
-const innerSliders = ref([]);
-const onInnerSwiper = (swiper) => {
+let innerSliders = ref([]);
+const onInnerSwiper = (e) => {
+  const [swiper] = e.detail;
   innerSliders.value.push(swiper);
 };
 const randomArray = ref(shuffleArray(getNumbersArray(0, images.length - 1)));
@@ -113,18 +134,14 @@ onMounted(() => {
     &-box {
       position: relative;
     }
-
-    :deep(&-wrapper) {
-      width: auto;
-      flex-wrap: wrap;
-      margin: -20px -10px 0;
-    }
   }
 
   &__slide {
     margin: 20px 10px 0;
     padding-top: 21.9%;
-    width: calc(100% / 3 - 20px);
+    width: calc(99.99% / 3 - 20px);
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   &__img {
@@ -133,7 +150,6 @@ onMounted(() => {
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 6px;
     object-fit: cover;
     transition: transform 0.4s;
 
@@ -151,7 +167,15 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     border-radius: 6px;
-    object-fit: cover;
+  }
+
+  &__inner-slide {
+    transition: opacity 0.5s;
+    pointer-events: none;
+
+    &.swiper-slide-active {
+      pointer-events: all;
+    }
   }
 
   &__slide-btn {
@@ -204,10 +228,13 @@ onMounted(() => {
   }
 
   @media (min-width: 767.01px) {
-    &__slider {
-      :deep(&-wrapper) {
-        transform: translate(0, 0) !important;
-      }
+    &__slider::part(wrapper) {
+      width: auto;
+      flex-wrap: wrap;
+    }
+
+    &__inner-slider::part(wrapper) {
+      flex-wrap: nowrap;
     }
   }
 

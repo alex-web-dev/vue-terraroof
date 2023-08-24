@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import CatalogView from '@/views/CatalogView.vue';
 import ProductAbout from '@/views/ProductAbout.vue';
 import CartView from '@/views/CartView.vue';
+import ContactsView from '@/views/ContactsView.vue';
 
 const DEFAULT_TITLE = 'Terraroof';
 
@@ -41,7 +42,16 @@ const routes = [
       title: `${DEFAULT_TITLE} - Корзина`,
       layout: 'main'
     }
-  }
+  },
+  {
+    path: '/contacts',
+    name: 'contacts',
+    component: ContactsView,
+    meta: {
+      title: `${DEFAULT_TITLE} - Контакты`,
+      layout: 'main'
+    }
+  },
 ];
 
 const router = createRouter({

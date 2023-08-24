@@ -3,9 +3,9 @@
     <RouterLink class="user-nav__link" :to="{ name: 'cart' }">
       <img src="@/assets/img/icons/cart.svg" alt="" />
     </RouterLink>
-    <a class="user-nav__link" href="#">
+    <!-- <a class="user-nav__link" href="#">
       <img src="@/assets/img/icons/user.svg" alt="" />
-    </a>
+    </a> -->
   </div>
 </template>
 

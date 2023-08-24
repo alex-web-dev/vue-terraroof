@@ -4,7 +4,7 @@
       <div class="partners__content">
         <h2 class="title2 partners__title">Наши партнеры</h2>
         <div class="partners__slider-box">
-          <Swiper
+          <swiper-container
             class="partners__slider"
             :modules="modules"
             :breakpoints="swiperOptions.breakpoints"
@@ -13,10 +13,12 @@
             :pagination="swiperOptions.pagination"
             :autoplay="swiperOptions.autoplay"
           >
-            <SwiperSlide class="partners__slide" v-for="image in images" :key="image">
-              <img class="partners__img" :src="getImage(image)" alt="" />
-            </SwiperSlide>
-          </Swiper>
+            <swiper-slide class="partners__slide" v-for="img in images" :key="img">
+              <div class="igallery-modal__img">
+                <img class="partners__img" :src="getImage(img)" alt="" />
+              </div>
+            </swiper-slide>
+          </swiper-container>
           <div class="swiper-pagination-bullets--big partners__pagination"></div>
         </div>
       </div>
@@ -26,13 +28,14 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination, Autoplay } from 'swiper';
+import { register } from 'swiper/element';
+import { Pagination, Autoplay } from 'swiper/modules';
 import { getImage } from '@/hooks/img';
 import 'swiper/css';
 
-const modules = [Pagination, Autoplay];
+register();
 
+const modules = [Pagination, Autoplay];
 const images = ref([
   'partners/bazis-a.png',
   'partners/bi-group.png',
@@ -41,7 +44,6 @@ const images = ref([
   'partners/bi-group.png',
   'partners/mabetex.png'
 ]);
-
 const swiperOptions = {
   speed: 600,
   spaceBetween: 21,

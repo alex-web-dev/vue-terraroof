@@ -34,7 +34,7 @@ defineProps({
     required: true
   }
 });
-const emit = defineEmits('updateCount', 'remove');
+const emit = defineEmits(['updateCount', 'remove']);
 </script>
 
 <style lang="less" scoped>

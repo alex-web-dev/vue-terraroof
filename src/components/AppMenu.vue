@@ -14,11 +14,7 @@
           :key="item"
         >
           <template v-if="item.subMenu">
-            <button
-              class="menu__link"
-              :class="{ 'menu__link--active': item.linkActive }"
-              @click.stop="toggleSubmenu(index)"
-            >
+            <button class="menu__link" @click.stop="toggleSubmenu(index)" :data-text="item.text">
               {{ item.text }}
               <svg class="menu__link-icon" width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path
@@ -37,11 +33,7 @@
             />
           </template>
           <template v-else-if="item.catalogMenu">
-            <button
-              class="menu__link"
-              :class="{ 'menu__link--active': item.linkActive }"
-              @click="toggleSubmenu(index)"
-            >
+            <button class="menu__link" @click="toggleSubmenu(index)" :data-text="item.text">
               {{ item.text }}
               <svg class="menu__link-icon" width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path
@@ -63,8 +55,8 @@
           <RouterLink
             v-else
             class="menu__link"
-            :class="{ 'menu__link--active': item.linkActive }"
             :to="{ name: item.routerName }"
+            :data-text="item.text"
             >{{ item.text }}</RouterLink
           >
         </li>
@@ -99,7 +91,6 @@ import CatalogMenu from '@/components/CatalogMenu.vue';
 const menuList = ref([
   {
     text: 'Главная',
-    linkActive: true,
     routerName: 'home'
   },
   {
@@ -113,7 +104,6 @@ const menuList = ref([
   },
   {
     text: 'Каталог',
-    routerName: 'catalog',
     catalogMenu: [
       {
         img: 'catalog-menu/1.png',
@@ -188,15 +178,12 @@ const menuList = ref([
         img: 'catalog-menu/18.png',
         title: 'Кровельная вентиляция'
       }
-    ]
-  },
-  {
-    text: 'Блог',
+    ],
     routerName: 'catalog'
   },
   {
     text: 'Контакты',
-    routerName: 'catalog'
+    routerName: 'contacts'
   }
 ]);
 const isActive = ref(false);
@@ -243,47 +230,67 @@ function deactivateItem(item) {
     }
   }
 
-  &__item--catalog &__link {
-    &-icon {
-      display: none;
-    }
-  }
-
   &__link {
     position: relative;
     font-size: 14px;
+    white-space: nowrap;
+    position: relative;
+    display: block;
     transition: color 0.3s;
     color: #242728;
+    color: transparent;
+
+    &:before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      color: #242728;
+      transition: color .3s;
+    }
 
     &-icon {
-      transform: rotate(90deg);
-      margin-left: 8px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
       flex: 0 0 auto;
       stroke: #2d2b33;
       transition: stroke 0.3s;
     }
 
     @media (min-width: 992px) {
-      &:hover {
-        color: @color-second;
-      }
-
       &:hover &-icon {
         stroke: @color-second;
       }
+
+      &:hover:before {
+        color: @color-second;
+      }
     }
 
-    &--active {
-      font-weight: 700;
-      color: @color-second;
+    &.router-link-active {
+
+      &:before {
+        font-weight: 700;
+
+        color: @color-second;
+      }
     }
 
-    &--active &-icon {
+    &.router-link-active &-icon {
       stroke: @color-second;
     }
   }
 
+  &__item--catalog &__link,
   &__item--has-submenu &__link {
+    padding-right: 20px;
     display: flex;
     align-items: center;
   }
@@ -431,13 +438,13 @@ function deactivateItem(item) {
       border-top: 1px solid #e0e5ed;
 
       &-icon {
-        transform: rotate(0);
+        position: static;
+        transform: translateY(0) rotate(0);
       }
 
       &:before {
         left: 18px;
         right: unset;
-        font-weight: 600;
       }
     }
 
