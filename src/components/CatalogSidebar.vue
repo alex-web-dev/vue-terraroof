@@ -13,7 +13,7 @@
             <img
               class="catalog-sidebar__btn-img"
               v-if="category.img"
-              :src="getImage(category.img)"
+              :src="useImage(category.img)"
               alt=""
             />
             <span class="catalog-sidebar__btn-text">{{ category.name }}</span>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 import AppCheckbox from '@/components/AppCheckbox.vue';
 
 defineProps({

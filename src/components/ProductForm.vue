@@ -1,6 +1,6 @@
 <template>
   <form class="product-form__form" autocomplete="off" @submit.prevent="addToCart(info.id, count)">
-    <h1 class="title4 product-form__title">{{ info.name }}</h1>
+    <div class="title4 product-form__title">{{ info.name }}</div>
     <div class="product-form__meta">
       <div class="product-form__meta-list">
         <div v-if="info.recommendPercent" class="product-form__recommend product-form__meta-item">
@@ -52,7 +52,16 @@
       <div class="product-form__buy-footer">
         <AppCounter class="product-form__counter" :value="count" @update:value="count = $event" />
         <input type="hidden" :value="info.id" />
-        <button class="btn product-form__buy-btn">Добавить в корзину</button>
+
+        <button v-if="!storeCart.hasItem(props.info.id)" class="btn product-form__buy-btn">
+          Добавить в корзину
+        </button>
+        <RouterLink
+          v-else
+          class="btn btn--border btn--border-no-hover product-form__buy-btn"
+          :to="{ name: 'cart' }"
+          >В корзине</RouterLink
+        >
       </div>
     </div>
   </form>
@@ -63,12 +72,12 @@ import CheckboxColor from '@/components/CheckboxColor.vue';
 import AppCounter from '@/components/AppCounter.vue';
 import { useCart } from '@/stores/cart';
 import { useMessages } from '@/stores/messages';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const storeCart = useCart();
 const storeMessages = useMessages();
 const emit = defineEmits(['changeColor']);
-defineProps({
+const props = defineProps({
   info: {
     type: Object,
     required: true
@@ -78,7 +87,10 @@ defineProps({
     default: null
   }
 });
-const count = ref(1);
+const count = computed(() => {
+  const cartItem = storeCart.getItem(props.info.id);
+  return cartItem ? cartItem.count : 1;
+});
 
 function addToCart(id, count) {
   storeCart.addItem(id, count);
@@ -260,139 +272,84 @@ function addToCart(id, count) {
   }
 
   @media (max-width: 767px) {
-    .product-form {
-      &__meta {
-        margin-top: 12px;
+    &__title {
+      display: none;
+    }
+
+    &__images {
+      margin-right: 0;
+      flex: none;
+    }
+
+    &__meta {
+      margin-top: 16px;
+
+      &-list {
+        margin: -12px -8px 0;
       }
 
-      &__text {
-        margin-top: 18px;
-      }
-
-      &__label {
-        margin-bottom: 9px;
-        font-size: 17px;
-      }
-
-      &__colors {
-        margin-top: 18px;
-      }
-
-      &__delivery {
-        margin-top: 18px;
-        padding: 15px 12px 14px 20px;
-      }
-
-      &__buy {
-        margin-top: 20px;
-
-        &-footer {
-          margin-top: 20px;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        &-btn {
-          margin-top: 18px;
-          width: 100%;
-
-          &:not(:first-child) {
-            margin-left: 0;
-          }
-        }
-      }
-
-      &__price {
-        margin-top: 20px;
-        font-size: 17px;
-
-        &-old {
-          margin-right: 20px;
-        }
+      &-item {
+        margin: 12px 8px 0;
       }
     }
 
-    @media (max-width: 767px) {
-      &__title {
-        margin-bottom: 12px;
-        font-size: 24px;
+    &__recommend {
+      font-size: 13px;
+    }
+
+    &__order-count {
+      font-size: 13px;
+
+      &:before {
+        margin-right: 6px;
+        width: 18px;
+        height: 14px;
+      }
+    }
+
+    &__text {
+      margin-top: 16px;
+    }
+
+    &__label {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    &__colors {
+      margin-top: 16px;
+
+      &-list {
+        margin: -8px -4px 0;
       }
 
-      &__images {
-        margin-right: 0;
-        flex: none;
+      &-item {
+        margin: 8px 4px 0;
       }
+    }
 
-      &__meta {
-        margin-top: 16px;
+    &__delivery {
+      margin-top: 16px;
+    }
 
-        &-list {
-          margin: -12px -8px 0;
-        }
+    &__buy {
+      margin-top: 16px;
 
-        &-item {
-          margin: 12px 8px 0;
-        }
-      }
-
-      &__recommend {
-        font-size: 13px;
-      }
-
-      &__order-count {
-        font-size: 13px;
-
-        &:before {
-          margin-right: 6px;
-          width: 18px;
-          height: 14px;
-        }
-      }
-
-      &__text {
-        margin-top: 16px;
-      }
-
-      &__label {
-        margin-bottom: 8px;
+      &-btn {
         font-size: 16px;
       }
 
-      &__colors {
-        margin-top: 16px;
-
-        &-list {
-          margin: -8px -4px 0;
-        }
-
-        &-item {
-          margin: 8px 4px 0;
-        }
-      }
-
-      &__delivery {
+      &-footer {
         margin-top: 16px;
       }
+    }
 
-      &__buy {
-        margin-top: 16px;
+    &__price {
+      margin-top: 16px;
+      font-size: 16px;
 
-        &-btn {
-          font-size: 16px;
-        }
-
-        &-footer {
-          margin-top: 16px;
-        }
-      }
-
-      &__price {
-        margin-top: 16px;
-        font-size: 16px;
-
-        &-old {
-          margin-right: 16px;
-        }
+      &-old {
+        margin-right: 16px;
       }
     }
   }

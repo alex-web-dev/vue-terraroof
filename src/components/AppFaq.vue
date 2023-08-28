@@ -6,21 +6,13 @@
           <h2 class="title2 faq__title">Ответы на ваши вопросы</h2>
         </div>
         <div class="faq__list">
-          <AppAccordion
+          <FaqItem
             class="faq__item"
             v-for="item in faqList"
             :key="item"
-            header-class="faq__item-header"
-            main-class="faq__item-main"
-          >
-            <template #btn>
-              {{ item.title }}
-              <span class="faq__item-arrow"></span>
-            </template>
-            <template #content>
-              <div class="text faq__item-text" v-html="item.content"></div>
-            </template>
-          </AppAccordion>
+            :title="item.title"
+            :content="item.content"
+          />
         </div>
       </div>
     </div>
@@ -28,9 +20,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import AppAccordion from '@/components/AppAccordion.vue';
-const faqList = ref([
+import { reactive } from 'vue';
+import FaqItem from '@/components/FaqItem.vue';
+
+const faqList = reactive([
   {
     title: 'Хочу заменить старую кровлю. Как это будет происходить?',
     content: `
@@ -93,7 +86,7 @@ const faqList = ref([
   @media (max-width: 1240px) {
     padding: 65px 0 75px;
 
-    &__info  {
+    &__info {
       flex-basis: 370px;
     }
 
@@ -105,7 +98,7 @@ const faqList = ref([
   }
 
   @media (max-width: 1140px) {
-    &__info  {
+    &__info {
       flex-basis: 310px;
     }
   }
@@ -139,7 +132,6 @@ const faqList = ref([
         margin-top: 8px;
       }
     }
-    
   }
 }
 </style>

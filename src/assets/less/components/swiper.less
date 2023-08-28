@@ -1,65 +1,111 @@
-.swiper-pagination {
-  &-bullets {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    z-index: 1;
-    transform: translateX(-50%);
+.swiper-pagination-bullets {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+}
+
+.swiper-pagination-bullet {
+  padding: 4px;
+  line-height: 0;
+  cursor: pointer;
+  background-color: transparent;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 50%;
   }
 
-  &-bullet {
-    padding: 4px;
-    line-height: 0;
-    cursor: pointer;
+  &-active {
+    background-color: transparent;
 
     &:before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background-color: #fff;
-      border-radius: 50%;
+      background-color: @color-second;
     }
+  }
+}
 
-    &-active {
+.swiper-pagination-lock {
+  display: none;
+}
+
+.swiper-bullets {
+  &--medium {
+    .swiper-pagination-bullet {
       &:before {
-        background-color: @color-second;
+        width: 8px;
+        height: 8px;
       }
     }
   }
 
-  &-bullets--big &-bullet {
-    padding-left: 3px;
-    padding-right: 3px;
+  &--big {
+    .swiper-pagination-bullet {
+      padding-left: 3px;
+      padding-right: 3px;
 
-    &:before {
-      width: 16px;
-      height: 16px;
-      background-color: #ededed;
-    }
-
-    &-active {
       &:before {
-        background-color: @color-primary;
+        width: 16px;
+        height: 16px;
+        background-color: #ededed;
+      }
+
+      &-active {
+        &:before {
+          background-color: @color-second;
+        }
+      }
+    }
+  }
+
+  &--gray {
+    .swiper-pagination-bullet {
+      &:before {
+        background-color: #d9d9d9;
+      }
+
+      &-active {
+        &:before {
+          background-color: @color-second;
+        }
+      }
+    }
+  }
+
+  &--active-primary {
+    .swiper-pagination-bullet {
+      &-active {
+        &:before {
+          background-color: @color-primary;
+        }
       }
     }
   }
 
   @media (max-width: 991px) {
-    &-bullets--big &-bullet {
-      &:before {
-        width: 12px;
-        height: 12px;
+    &--big {
+      .swiper-pagination-bullet {
+        &:before {
+          width: 12px;
+          height: 12px;
+        }
       }
     }
   }
 
   @media (max-width: 767px) {
-    &-bullets--big &-bullet {
-      &:before {
-        width: 6px;
-        height: 6px;
+    &--big {
+      .swiper-pagination-bullet {
+        &:before {
+          width: 6px;
+          height: 6px;
+        }
       }
     }
   }

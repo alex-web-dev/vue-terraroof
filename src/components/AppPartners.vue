@@ -2,8 +2,9 @@
   <section class="partners">
     <div class="container">
       <div class="partners__content">
-        <h2 class="title2 partners__title">Наши партнеры</h2>
-        <div class="partners__slider-box">
+        <h2 v-if="title" class="title2 title2--center partners__title">{{ title }}</h2>
+        <h3 v-if="subtitle" class="title4 partners__title">{{ subtitle }}</h3>
+        <div v-if="images" class="partners__slider-box">
           <swiper-container
             class="partners__slider"
             :modules="modules"
@@ -12,14 +13,15 @@
             :speed="swiperOptions.speed"
             :pagination="swiperOptions.pagination"
             :autoplay="swiperOptions.autoplay"
+            :loop="true"
           >
             <swiper-slide class="partners__slide" v-for="img in images" :key="img">
               <div class="igallery-modal__img">
-                <img class="partners__img" :src="getImage(img)" alt="" />
+                <img class="partners__img" :src="useImage(img)" alt="" />
               </div>
             </swiper-slide>
           </swiper-container>
-          <div class="swiper-pagination-bullets--big partners__pagination"></div>
+          <div class="swiper-bullets partners__pagination" :class="paginationClass"></div>
         </div>
       </div>
     </div>
@@ -27,23 +29,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { register } from 'swiper/element';
 import { Pagination, Autoplay } from 'swiper/modules';
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 import 'swiper/css';
 
 register();
 
+const props = defineProps({
+  title: {
+    type: String,
+    default: null
+  },
+  subtitle: {
+    type: String,
+    default: null
+  },
+  images: {
+    type: Array,
+    required: true
+  },
+  paginationType: {
+    type: String,
+    default: null
+  }
+});
 const modules = [Pagination, Autoplay];
-const images = ref([
-  'partners/bazis-a.png',
-  'partners/bi-group.png',
-  'partners/mabetex.png',
-  'partners/bazis-a.png',
-  'partners/bi-group.png',
-  'partners/mabetex.png'
-]);
 const swiperOptions = {
   speed: 600,
   spaceBetween: 21,
@@ -64,22 +76,33 @@ const swiperOptions = {
     disableOnInteraction: false
   }
 };
+
+const paginationClass = computed(() => {
+  if (props.paginationType === 'red') {
+    return 'swiper-bullets--medium swiper-bullets--gray';
+  }
+
+  return 'swiper-bullets--big swiper-bullets--active-primary';
+});
 </script>
 
 <style lang="less" scoped>
 @import '@/assets/less/vars.less';
-
 .partners {
   overflow: hidden;
 
   &__title {
     margin-bottom: 42px;
-    text-align: center;
   }
 
   &__slider {
     margin: -40px -40px;
     padding: 40px 40px;
+
+    &::part(container) {
+      margin: -40px -40px;
+      padding: 40px 40px;
+    }
 
     &-box {
       position: relative;
@@ -97,9 +120,9 @@ const swiperOptions = {
     justify-content: center;
     transition: box-shadow 0.3s, background 0.3s;
 
-    &.swiper-slide.swiper-slide-active,
-    &.swiper-slide.swiper-slide-next,
-    &.swiper-slide.swiper-slide-next + .swiper-slide {
+    &.swiper-slide-active,
+    &.swiper-slide-next,
+    &.swiper-slide-next + .partners__slide {
       box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
       background: #ffffff;
     }

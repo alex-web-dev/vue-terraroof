@@ -16,7 +16,7 @@
 <script setup>
 import ModalForm from '@/components/ModalForm.vue';
 import AppModal from '@/components/AppModal.vue';
-import { formValidate, clearError, clearValues } from '@/hooks/form';
+import { useForm } from '@/hooks/form';
 import { reactive } from 'vue';
 
 const emit = defineEmits(['close']);
@@ -26,6 +26,7 @@ defineProps({
     default: false
   }
 });
+const { formValidate, clearValues, clearError } = useForm();
 const formData = reactive({
   isSent: false,
   items: [

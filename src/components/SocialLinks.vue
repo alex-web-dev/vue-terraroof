@@ -8,14 +8,14 @@
         target="_blank"
         :key="item"
       >
-        <img :src="getImage(item.icon)" alt="" />
+        <img :src="useImage(item.icon)" alt="" />
       </a>
     </div>
   </div>
 </template>
 
 <script setup>
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 
 defineProps({
   list: {

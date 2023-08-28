@@ -27,7 +27,7 @@ const storeMessages = useMessages();
   left: 0;
   padding: 0 20px;
   z-index: 20;
-  max-height: 160px;
+  max-height: 147px;
   overflow: hidden;
 
   &__item {

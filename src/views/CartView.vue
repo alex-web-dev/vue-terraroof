@@ -1,5 +1,5 @@
 <template>
-  <main class="main">
+  <AppMain>
     <AppCart :items="storeCart.cart" @update-count="updateCartItem" @remove-item="removeCartItem" />
     <CartData v-if="storeCart.cart.length !== 0" @form-send="sendForm" />
     <Teleport to="body">
@@ -7,13 +7,14 @@
         <ModalMessage :open="formSent" type="message" @close="closeMessage" />
       </Transition>
     </Teleport>
-  </main>
+  </AppMain>
 </template>
 
 <script setup>
 import AppCart from '@/components/AppCart.vue';
 import CartData from '@/components/CartData.vue';
 import ModalMessage from '@/components/ModalMessage.vue';
+import AppMain from '@/components/AppMain.vue';
 import { useCart } from '@/stores/cart';
 import { useMessages } from '@/stores/messages';
 import { ref } from 'vue';

@@ -3,6 +3,7 @@
     <div class="container">
       <div class="product__content">
         <AppBreadcrumbs :list="breadcrumbs" />
+        <h1 class="title4 product__title">{{ product.name }}</h1>
         <div class="product__main">
           <ProductImages class="product__images" :images="selectedImages" />
           <ProductForm
@@ -29,15 +30,17 @@
 import ProductImages from '@/components/ProductImages.vue';
 import ProductForm from '@/components/ProductForm.vue';
 import AppTabs from '@/components/AppTabs.vue';
+import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import { reactive, computed } from 'vue';
 import { useProducts } from '@/stores/products';
 import { useRoute } from 'vue-router';
+
 
 const route = useRoute();
 const productId = +route.params.id;
 const storeProducts = useProducts();
 const product = reactive(storeProducts.getProduct(productId));
-const breadcrumbs = reactive([{ name: 'Главная', route: 'home' }, { name: 'Каталог' }]);
+const breadcrumbs = reactive([{ name: 'Главная', route: 'home' }, { name: 'Каталог', route: 'catalog' }, { name: product.name }]);
 const colors = reactive({
   selected: product.colors[0].value,
   list: product.colors
@@ -45,7 +48,6 @@ const colors = reactive({
 const selectedImages = computed(() => {
   return colors.list.find((color) => color.value === colors.selected);
 });
-
 const tabs = reactive(
   product.details.map((detail, index) => {
     return {
@@ -73,6 +75,11 @@ function changeColor(value) {
 @import '@/assets/less/mixins.less';
 
 .product {
+  &__title {
+    margin-bottom: 12px;
+    display: none;
+  }
+
   &__main {
     display: flex;
     align-items: flex-start;
@@ -145,8 +152,17 @@ function changeColor(value) {
       max-width: @content-sm-max-width;
     }
 
+    &__title {
+      display: block;
+      font-size: 24px;
+    }
+
     &__main {
       flex-direction: column;
+    }
+
+    &__images {
+      margin-right: 0;
     }
 
     :deep(&__tab-content) {

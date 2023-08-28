@@ -8,7 +8,9 @@
           </a>
           <ul class="footer__menu">
             <li class="footer__menu-item" v-for="item in menuList" :key="item">
-              <a class="footer__menu-link" :href="item.link">{{ item.text }}</a>
+              <RouterLink class="footer__menu-link" :to="{ name: item.routerName }">{{
+                item.text
+              }}</RouterLink>
             </li>
           </ul>
           <SocialLinks :list="socialLinks" />
@@ -25,10 +27,10 @@
               v-for="company in companies"
               :key="company"
             >
-              <img class="footer__company-img" :src="getImage(company.img)" alt="" />
+              <img class="footer__company-img" :src="useImage(company.img)" alt="" />
               <img
                 class="footer__company-img footer__company-img--hover"
-                :src="getImage(company.imgHover)"
+                :src="useImage(company.imgHover)"
                 alt=""
               />
             </a>
@@ -42,19 +44,19 @@
 <script setup>
 import { reactive } from 'vue';
 import SocialLinks from '@/components/SocialLinks.vue';
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 
 const menuList = reactive([
   {
-    link: 'about.html',
+    routerName: 'about',
     text: 'О компании'
   },
   {
-    link: 'about.html',
+    routerName: 'about',
     text: 'Публичная оферта'
   },
   {
-    link: 'about.html',
+    routerName: 'about',
     text: 'Политика конфиденциальности'
   }
 ]);

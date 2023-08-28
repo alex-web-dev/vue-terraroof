@@ -1,14 +1,12 @@
 <template>
   <ul class="submenu" ref="$submenu">
-    <li
-      class="submenu__item"
-      v-for="subitem in subMenu"
-      :key="subitem"
-      @click="emit('clickOnItem')"
-    >
-      <RouterLink class="submenu__item-link" :to="{ name: subitem.routerName }">{{
-        subitem.text
-      }}</RouterLink>
+    <li class="submenu__item" v-for="subitem in subMenu" :key="subitem" @click="emit('clickItem')">
+      <RouterLink
+        class="submenu__item-link"
+        :to="{ name: subitem.routerName }"
+        @click="emit('clickLink')"
+        >{{ subitem.text }}</RouterLink
+      >
     </li>
   </ul>
 </template>
@@ -22,7 +20,7 @@ defineProps({
     required: true
   }
 });
-const emit = defineEmits(['clickOutside', 'clickOnItem']);
+const emit = defineEmits(['clickOutside', 'clickItem', 'clickLink']);
 const $submenu = ref(null);
 
 window.addEventListener('click', (e) => {
@@ -52,6 +50,10 @@ window.addEventListener('click', (e) => {
 
       &:hover {
         background-color: #eee;
+      }
+
+      &.router-link-exact-active {
+        color: @color-second;
       }
     }
 

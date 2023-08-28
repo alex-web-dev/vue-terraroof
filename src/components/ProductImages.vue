@@ -1,14 +1,27 @@
 <template>
   <div class="product-images">
-    <IGallery :images="[images.mainImg, ...images.otherImages]" :active="galleryActive" :initial="galleryImgNum"
-      @close="galleryActive = false">
+    <IGallery
+      :images="[images.mainImg, ...images.otherImages]"
+      :active="galleryActive"
+      :initial="galleryImgNum"
+      @close="galleryActive = false"
+    >
       <div class="product-images__main">
-        <IGalleryImg class="product-images__main-img" :src="getImage(images.mainImg)" alt="" @click="openGallery(event, 0)" />
+        <IGalleryImg
+          class="product-images__main-img"
+          :src="useImage(images.mainImg)"
+          alt=""
+          @click="openGallery(event, 0)"
+        />
         <AppTags class="product-images__main-tags" :list="[{ type: 'sale', text: 'акция -20%' }]" />
       </div>
       <div class="product-images__other">
-        <div class="product-images__other-img" v-for="(img, index) in images.otherImages" :key="img">
-          <IGalleryImg :src="getImage(img)" alt="" @click="openGallery(event, index + 1)" />
+        <div
+          class="product-images__other-img"
+          v-for="(img, index) in images.otherImages"
+          :key="img"
+        >
+          <IGalleryImg :src="useImage(img)" alt="" @click="openGallery(event, index + 1)" />
         </div>
       </div>
     </IGallery>
@@ -17,8 +30,8 @@
 
 <script setup>
 import AppTags from '@/components/AppTags.vue';
-import IGallery from './IGallery.vue';
-import { getImage } from '@/hooks/img';
+import IGallery from '@/components/IGallery.vue';
+import { useImage } from '@/hooks/img';
 import IGalleryImg from '@/components/IGalleryImg.vue';
 import { ref } from 'vue';
 
@@ -34,7 +47,7 @@ const galleryImgNum = ref(0);
 
 function openGallery(_, num = 0) {
   galleryImgNum.value = num;
-  galleryActive.value = true
+  galleryActive.value = true;
 }
 </script>
 

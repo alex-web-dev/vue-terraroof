@@ -17,4 +17,4 @@ AOS.init({
   duration: 800
 });
 
-createApp(App).use(createPinia()).use(router).mount('#app');
+const app = createApp(App).use(createPinia()).use(router).mount('#app');

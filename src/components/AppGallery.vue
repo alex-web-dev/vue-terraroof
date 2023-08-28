@@ -28,7 +28,7 @@
               img-class="gallery__img"
             />
             <a v-else class="gallery__item" :href="item.link" target="_blank">
-              <img class="gallery__img" :src="getImage(item.img)" alt="" />
+              <img class="gallery__img" :src="useImage(item.img)" alt="" />
             </a>
           </template>
         </div>
@@ -40,7 +40,7 @@
 <script setup>
 import YoutubePlayer from '@/components/YoutubePlayer.vue';
 import { useSlots } from 'vue';
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 
 const slots = useSlots();
 

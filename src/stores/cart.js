@@ -31,11 +31,26 @@ export const useCart = defineStore('cart', () => {
     cart.value.splice(index, 1);
   }
 
+  function getItem(id) {
+    const item = cart.value.find((item) => item.id === id);
+    return item;
+  }
+
+  function hasItem(id) {
+    const item = cart.value.find((item) => item.id === id);
+
+    if (item) {
+      return true;
+    }
+
+    return false;
+  }
+
   function clear() {
     cart.value = [];
   }
 
-  return { cart, addItem, updateItem, removeItem, clear };
+  return { cart, addItem, updateItem, removeItem, getItem, hasItem, clear };
 });
 
 if (import.meta.hot) {

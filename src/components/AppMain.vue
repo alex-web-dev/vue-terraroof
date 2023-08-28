@@ -19,6 +19,14 @@
 
   &__section {
     margin-top: 112px;
+
+    &--mt-82 {
+      margin-top: 82px;
+    }
+
+    &--mt-72 {
+      margin-top: 72px;
+    }
   }
 
   &__faq {
@@ -45,8 +53,20 @@
     margin-top: 72px;
   }
 
+  &__create {
+    margin-top: 72px;
+  }
+
+  &__steps {
+    margin-top: 72px;
+  }
+
   &--home {
     padding-top: calc(88px + 24px);
+  }
+
+  &--about {
+    padding-bottom: 60px;
   }
 
   @media (max-width: 1240px) {
@@ -125,6 +145,14 @@
       margin-top: 35px;
     }
 
+    &__create {
+      margin-top: 52px;
+    }
+
+    &__steps {
+      margin-top: 52px;
+    }
+
     &--home {
       padding-top: calc(77px + 24px);
       padding-bottom: 70px;
@@ -164,6 +192,14 @@
 
     &__article-callback {
       margin-top: 24px;
+    }
+
+    &__create {
+      margin-top: 32px;
+    }
+
+    &__steps {
+      margin-top: 32px;
     }
 
     &--home {

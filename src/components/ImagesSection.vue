@@ -33,7 +33,7 @@
                   v-for="innerImage in images"
                   :key="innerImage"
                 >
-                  <img class="images-section__img" :src="getImage(innerImage)" alt="" />
+                  <img class="images-section__img" :src="useImage(innerImage)" alt="" />
                 </swiper-slide>
               </swiper-container>
             </swiper-slide>
@@ -58,12 +58,13 @@
 import { onMounted, reactive, ref } from 'vue';
 import { register } from 'swiper/element';
 import { Pagination, EffectFade } from 'swiper/modules';
-import { getNumbersArray, shuffleArray } from '@/hooks/array';
-import { getImage } from '@/hooks/img';
+import { useArray } from '@/hooks/array';
+import { useImage } from '@/hooks/img';
 import { useModals } from '@/stores/modals';
 
 import 'swiper/css';
 import 'swiper/element/css/effect-fade';
+
 const storeModals = useModals();
 
 register();
@@ -90,6 +91,7 @@ const swiperOptions = {
   }
 };
 
+const { getNumbersArray, shuffleArray } = useArray();
 const showImagesLimit = 5;
 const images = reactive([
   'house-images/1.jpg',

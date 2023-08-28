@@ -23,9 +23,10 @@
 <script setup>
 import { reactive } from 'vue';
 import AppForm from '@/components/AppForm.vue';
-import { formValidate, clearError, clearValues } from '@/hooks/form';
+import { useForm } from '@/hooks/form';
 
 const emit = defineEmits('formSend');
+const { formValidate, clearValues, clearError } = useForm();
 const formData = reactive({
   isSent: false,
   items: [

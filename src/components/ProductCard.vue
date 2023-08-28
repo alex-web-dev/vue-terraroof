@@ -1,8 +1,10 @@
 <template>
   <div class="product-card" :class="{ 'product-card--preview': type === 'preview' }">
-    <RouterLink class="product-card__img-box product-card__img-box--large"
-      :to="{ name: 'product', params: { id: data.id } }">
-      <img class="product-card__img" :src="getImage(data.img)" alt="" />
+    <RouterLink
+      class="product-card__img-box product-card__img-box--large"
+      :to="{ name: 'product', params: { id: data.id } }"
+    >
+      <img class="product-card__img" :src="useImage(data.img)" alt="" />
       <AppTags class="product-card__tags" v-if="data.tags" list-position="end" :list="data.tags" />
     </RouterLink>
     <div class="product-card__info product-card__info--large">
@@ -11,7 +13,7 @@
       </h3>
       <div class="product-card__meta">
         <div class="text text--gray product-card__status">{{ available }}</div>
-        <img class="product-card__logo" :src="getImage(data.companyImg)" alt="">
+        <img class="product-card__logo" :src="useImage(data.companyImg)" alt="" />
       </div>
       <p class="text text--gray product-card__text">{{ data.text }}</p>
       <div class="product-card__price">
@@ -23,14 +25,17 @@
           тг
         </span>
       </div>
-      <RouterLink class="btn btn--border product-card__btn" :to="{ name: 'product', params: { id: data.id } }">Заказать
+      <RouterLink
+        class="btn btn--border product-card__btn"
+        :to="{ name: 'product', params: { id: data.id } }"
+        >Заказать
       </RouterLink>
     </div>
   </div>
 </template>
 
 <script setup>
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 import AppTags from '@/components/AppTags.vue';
 import { RouterLink } from 'vue-router';
 import { computed } from 'vue';
@@ -199,7 +204,6 @@ const available = computed(() => {
     &__info {
       padding: 14px 14px 21px;
     }
-
 
     &__logo {
       max-width: 64px;

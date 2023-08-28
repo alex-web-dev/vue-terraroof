@@ -4,6 +4,9 @@ import CatalogView from '@/views/CatalogView.vue';
 import ProductAbout from '@/views/ProductAbout.vue';
 import CartView from '@/views/CartView.vue';
 import ContactsView from '@/views/ContactsView.vue';
+import AboutView from '@/views/AboutView.vue';
+import CooperateView from '@/views/CooperateView.vue';
+import { useProducts } from '@/stores/products';
 
 const DEFAULT_TITLE = 'Terraroof';
 
@@ -52,6 +55,24 @@ const routes = [
       layout: 'main'
     }
   },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutView,
+    meta: {
+      title: `${DEFAULT_TITLE} - О нас`,
+      layout: 'main'
+    }
+  },
+  {
+    path: '/cooperate',
+    name: 'cooperate',
+    component: CooperateView,
+    meta: {
+      title: `${DEFAULT_TITLE} - Сотрудничество`,
+      layout: 'main'
+    }
+  }
 ];
 
 const router = createRouter({
@@ -76,7 +97,15 @@ const router = createRouter({
 });
 
 router.afterEach((to) => {
-  document.title = to.meta.title || DEFAULT_TITLE;
+  let title = to.meta.title || DEFAULT_TITLE;
+  if (to.name === 'product') {
+    const productId = +to.params.id;
+    const storeProducts = useProducts();
+    const product = storeProducts.getProduct(productId);
+    title = `${DEFAULT_TITLE} - ${product?.name}`;
+  }
+
+  document.title = title;
 });
 
 export default router;

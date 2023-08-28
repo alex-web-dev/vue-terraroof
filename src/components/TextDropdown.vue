@@ -1,20 +1,23 @@
 <template>
-  <div class="text-content text-dropdown">
-    <div class="text-dropdown__main" ref="$text">
-      <slot></slot>
-    </div>
+  <div class="text-dropdown">
+    <TextContent class="text-dropdown__content">
+      <div class="text-dropdown__main" ref="$text">
+        <slot></slot>
+      </div>
+    </TextContent>
     <button v-if="showBtn" class="text-dropdown__more" @click="openText">Далее</button>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { cutText } from '@/hooks/text';
+import { useText } from '@/hooks/text';
+import TextContent from '@/components/TextContent.vue';
 
+const { cutText } = useText();
 const $text = ref(null);
 const initialText = ref(null);
 const showBtn = ref(false);
-
 const props = defineProps({
   width: {
     type: Number,
@@ -47,6 +50,10 @@ function openText() {
 @import '@/assets/less/vars.less';
 
 .text-dropdown {
+  &__content {
+    display: inline;
+  }
+
   &__main {
     display: inline;
   }

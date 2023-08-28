@@ -20,7 +20,7 @@
               <img
                 v-if="item.img"
                 class="categories-section__item-bg"
-                :src="getImage(item.img)"
+                :src="useImage(item.img)"
                 alt=""
               />
             </div>
@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 
 const list = ref([
   {

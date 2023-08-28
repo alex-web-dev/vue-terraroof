@@ -1,8 +1,12 @@
-export function getScrollbarWidth() {
-  const documentWidth = document.documentElement.clientWidth;
-  return Math.abs(window.innerWidth - documentWidth);
-}
+export function useScrollbar() {
+  function getScrollbarWidth() {
+    const documentWidth = document.documentElement.clientWidth;
+    return Math.abs(window.innerWidth - documentWidth);
+  }
 
-export default {
-  getScrollbarWidth
-};
+  function getScrollbarWidthPX() {
+    return `${getScrollbarWidth()}px`;
+  }
+
+  return { getScrollbarWidth, getScrollbarWidthPX };
+}

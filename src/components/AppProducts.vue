@@ -1,7 +1,13 @@
 <template>
   <div class="products">
     <div class="products__list">
-      <ProductCard class="products__item" v-for="product in products" :data="product" :type="type" :key="product" />
+      <ProductCard
+        class="products__item"
+        v-for="product in products"
+        :data="product"
+        :type="type"
+        :key="product"
+      />
     </div>
   </div>
 </template>

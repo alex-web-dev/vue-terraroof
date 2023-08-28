@@ -11,10 +11,11 @@
 </template>
 
 <script setup>
-import { lockBody, unlockBody, isBodyLock } from '@/hooks/body';
+import { useBody } from '@/hooks/body';
 import { ref, watch } from 'vue';
 import { useModals } from '@/stores/modals';
 
+const { lockBody, unlockBody, isBodyLock } = useBody();
 const storeModals = useModals();
 const props = defineProps({
   type: {

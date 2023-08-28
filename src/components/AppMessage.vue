@@ -17,13 +17,9 @@ defineProps({
 @import '@/assets/less/vars.less';
 
 .message {
-  padding: 13px;
+  padding: 12px 15px;
   border-radius: 6px;
   background: #e0e0e0;
-
-  &__text {
-    font-size: 18px;
-  }
 
   &--success {
     background-color: #109334;

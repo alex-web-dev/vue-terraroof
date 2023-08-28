@@ -6,12 +6,12 @@
         <div class="catalog__header">
           <h1 class="title4 catalog__title">Композитная черепица</h1>
           <div class="catalog__companies">
-            <Simplebar>
+            <Simplebar v-if="loadCompaniesBar">
               <div class="catalog__companies-list">
-                <img class="catalog__company" src="@/assets/img/companies/1.png" alt="">
-                <img class="catalog__company" src="@/assets/img/companies/2.png" alt="">
-                <img class="catalog__company" src="@/assets/img/companies/3.png" alt="">
-                <img class="catalog__company" src="@/assets/img/companies/4.png" alt="">
+                <img class="catalog__company" src="@/assets/img/companies/1.png" alt="" />
+                <img class="catalog__company" src="@/assets/img/companies/2.png" alt="" />
+                <img class="catalog__company" src="@/assets/img/companies/3.png" alt="" />
+                <img class="catalog__company" src="@/assets/img/companies/4.png" alt="" />
               </div>
             </Simplebar>
           </div>
@@ -21,9 +21,17 @@
           Каталог
         </button>
         <div class="catalog__main">
-          <CatalogSidebar class="catalog__sidebar" :open="isSidebarOpen" @close="isSidebarOpen = false"
-            :categories="categories" />
-          <AppProducts class="catalog__products" :products="filteredProducts" :info="productsInfo" />
+          <CatalogSidebar
+            class="catalog__sidebar"
+            :open="isSidebarOpen"
+            @close="isSidebarOpen = false"
+            :categories="categories"
+          />
+          <AppProducts
+            class="catalog__products"
+            :products="filteredProducts"
+            :info="productsInfo"
+          />
         </div>
       </div>
     </div>
@@ -36,9 +44,10 @@ import CatalogSidebar from '@/components/CatalogSidebar.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import Simplebar from 'simplebar-vue';
 import { useProducts } from '@/stores/products';
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, onMounted, nextTick } from 'vue';
 import { useCategories } from '@/stores/categories';
 
+const loadCompaniesBar = ref(false);
 const isSidebarOpen = ref(false);
 const breadcrumbs = reactive([{ name: 'Главная', route: 'home' }, { name: 'Каталог' }]);
 const storeProducts = useProducts();
@@ -79,8 +88,14 @@ const productsInfo = ref([
         псевдо-латинский набор слов, но это не совсем так. Его корни
         уходят в один фрагмент классической латыни 45 года н.э</p>
     `
-  },
+  }
 ]);
+
+onMounted(() => {
+  setTimeout(() => {
+    loadCompaniesBar.value = true;
+  });
+});
 </script>
 
 <style lang="less" scoped>
@@ -186,7 +201,6 @@ const productsInfo = ref([
 
       &-list {
         padding-bottom: 8px;
-        width: 100%;
       }
 
       .simplebar-content {

@@ -24,7 +24,7 @@
     </CallbackBg>
     <ImagesSection class="main__section" />
     <InfoSection class="main__section" />
-    <AppPartners class="main__section" />
+    <AppPartners class="main__section" title="Наши партнеры" :images="partnersImages" />
     <AppFaq class="main__faq" />
     <PriceList class="main__section" />
     <AppSocial class="main__section" />
@@ -70,6 +70,15 @@ import AppSocial from '@/components/AppSocial.vue';
 import AppGallery from '@/components/AppGallery.vue';
 import ProductsSection from '@/components/ProductsSection.vue';
 import { reactive } from 'vue';
+
+const partnersImages = reactive([
+  'partners/bazis-a.png',
+  'partners/bi-group.png',
+  'partners/mabetex.png',
+  'partners/bazis-a.png',
+  'partners/bi-group.png',
+  'partners/mabetex.png'
+]);
 
 const instagramGalleryList = reactive([
   {

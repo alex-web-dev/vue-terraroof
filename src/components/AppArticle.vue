@@ -10,7 +10,10 @@
               покупке кровли мы создаем 3D-визуализацию в подарок!
             </p>
           </div>
-          <button class="btn article__btn article__btn--desktop" @click="storeModals.open('callback')">
+          <button
+            class="btn article__btn article__btn--desktop"
+            @click="storeModals.open('callback')"
+          >
             Узнать подробнее
           </button>
           <RouterLink class="btn article__btn article__btn--mobile" :to="{ name: 'catalog' }">

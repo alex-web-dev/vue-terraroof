@@ -11,15 +11,16 @@
               :to="{ name: 'catalog' }"
               v-for="item in list"
               :key="item"
-              @click="closeMenu"
+              @click="emit('clickOnLink')"
             >
               <div class="catalog-menu__item-img">
-                <img :src="getImage(item.img)" alt="" />
+                <img :src="useImage(item.img)" alt="" />
               </div>
               <div class="catalog-menu__item-title">{{ item.title }}</div>
             </RouterLink>
           </div>
-          <button class="catalog-menu__close" @click="closeMenu"></button>
+          <button class="catalog-menu__close" @click="emit('close')"></button>
+          <img class="catalog-menu__scroll-icon" src="@/assets/img/icons/mouse-scroll.svg" alt="">
         </div>
       </Simplebar>
     </div>
@@ -28,11 +29,11 @@
 
 <script setup>
 import { ref } from 'vue';
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 import Simplebar from 'simplebar-vue';
 import 'simplebar-vue/dist/simplebar.min.css';
 
-const emit = defineEmits(['clickOutside', 'close']);
+const emit = defineEmits(['clickOutside', 'close', 'clickOnLink']);
 const $catalogMenu = ref(null);
 
 window.addEventListener('click', (e) => {
@@ -40,10 +41,6 @@ window.addEventListener('click', (e) => {
     emit('clickOutside');
   }
 });
-
-function closeMenu() {
-  emit('close');
-}
 
 defineProps({
   list: {
@@ -67,6 +64,7 @@ defineProps({
 
   [data-simplebar] {
     flex: 1 1 100%;
+    min-width: 0;
   }
 
   &__content {
@@ -84,10 +82,10 @@ defineProps({
   }
 
   &__main {
-    padding: 48px 65px 25px 62px;
+    padding: 48px 65px 25px 60px;
   }
 
-  &__content.simplebar-scrollable-y &__scroll-icon {
+  &__content .simplebar-scrollable-y &__scroll-icon {
     display: block;
   }
 
@@ -104,7 +102,7 @@ defineProps({
 
   &__item {
     position: relative;
-    padding: 15px;
+    padding: 15px 12px;
     display: flex;
     align-items: center;
     background: #f4fbff;
@@ -131,7 +129,7 @@ defineProps({
       word-break: break-word;
 
       &:not(:first-child) {
-        margin-left: 14px;
+        margin-left: 12px;
       }
     }
 

@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import AppMap from './AppMap.vue';
+import AppMap from '@/components/AppMap.vue';
 </script>
 
 <style lang="less" scoped>
@@ -99,7 +99,7 @@ import AppMap from './AppMap.vue';
       &-label {
         font-size: 15px;
       }
-      
+
       &-value {
         font-size: 20px;
       }

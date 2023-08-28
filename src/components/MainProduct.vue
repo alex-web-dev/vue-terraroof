@@ -8,7 +8,7 @@
         <div class="main-product__info">
           <AppTags class="main-product__tags" :list="[{ type: 'hit', text: 'хит продаж' }]" />
           <h2 class="title2 main-product__title">Композитная черепица</h2>
-          <TextDropdown class="main-product__text-content" :max-length="108" :width="767">
+          <TextDropdown class="main-product__text-content" :max-length="107" :width="767">
             Идеальна для резко-континентального климата Казахстана.
             <br /><br />
             Задерживает сход снега и не парусит при штормовых ветрах. Не нагревается, не выцветает,

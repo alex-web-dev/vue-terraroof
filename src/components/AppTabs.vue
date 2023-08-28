@@ -18,13 +18,15 @@
         v-for="item in list"
         :key="item"
       >
-        <div class="text-content" :class="contentClass" v-html="item.content"></div>
+        <TextContent :class="contentClass" v-html="item.content"></TextContent>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import TextContent from '@/components/TextContent.vue';
+
 defineProps({
   list: {
     type: Array,

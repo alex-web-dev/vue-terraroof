@@ -1,6 +1,6 @@
 <template>
   <div class="form-field" :class="{ 'form-field--error': data.isError }" :key="data">
-    <label class="form-field__label" :for="data.id">{{ data.label }}</label>
+    <label v-if="data.label" class="form-field__label" :for="data.id">{{ data.label }}</label>
     <AppInput
       v-if="data.element === 'input'"
       class="form-field__input"

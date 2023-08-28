@@ -4,7 +4,7 @@
       <div
         class="callback-bg__content"
         :class="{ 'callback-bg__content--backdrop': backdrop }"
-        :style="`background-image: url(${getImage(bg)})`"
+        :style="`background-image: url(${useImage(bg)})`"
       >
         <div class="callback-bg__main">
           <h2 v-if="slots.title" class="title2 callback-bg__title">
@@ -33,8 +33,8 @@
 
 <script setup>
 import AppForm from '@/components/AppForm.vue';
-import { getImage } from '@/hooks/img';
-import { formValidate, clearError, clearValues } from '@/hooks/form';
+import { useImage } from '@/hooks/img';
+import { useForm } from '@/hooks/form';
 import { reactive, useSlots } from 'vue';
 
 const slots = useSlots();
@@ -54,6 +54,7 @@ defineProps({
   }
 });
 
+const { formValidate, clearValues, clearError } = useForm();
 const formData = reactive({
   isSent: false,
   items: [

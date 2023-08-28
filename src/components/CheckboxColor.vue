@@ -9,14 +9,14 @@
       @change="emit('update:selected', $event.target.value)"
     />
     <span class="checkbox-color__switch">
-      <img :src="getImage(img)" alt="" />
+      <img :src="useImage(img)" alt="" />
       <span class="checkbox-color__text">{{ label }}</span>
     </span>
   </label>
 </template>
 
 <script setup>
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 
 defineProps({
   type: {

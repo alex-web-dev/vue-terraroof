@@ -12,7 +12,7 @@
         >
           <swiper-slide v-for="img in images" :key="img">
             <div class="igallery-modal__img">
-              <img :src="getImage(img)" alt="" />
+              <img :src="useImage(img)" alt="" />
             </div>
           </swiper-slide>
         </swiper-container>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { getImage } from '@/hooks/img';
+import { useImage } from '@/hooks/img';
 import { onUpdated } from 'vue';
 import { ref, reactive } from 'vue';
 import { register } from 'swiper/element';
@@ -222,6 +222,11 @@ onUpdated(() => {
       top: 0;
 
       svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      &:before {
         width: 16px;
         height: 16px;
       }

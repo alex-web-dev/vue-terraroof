@@ -3,7 +3,7 @@
     <div class="container">
       <div class="header__content">
         <AppLogo class="header__logo" />
-        <AppMenu class="header__menu" />
+        <TheMenu class="header__menu" />
         <UserNav class="header__user-nav" />
         <a class="header__contact" href="tel:+77776333330">
           <div class="header__contact-icon">
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import AppMenu from '@/components/AppMenu.vue';
+import TheMenu from '@/components/TheMenu.vue';
 import AppLogo from '@/components/AppLogo.vue';
 import UserNav from '@/components/UserNav.vue';
 </script>

@@ -1,84 +1,39 @@
 <template>
   <div class="map">
     <div class="map__marks">
-      <div class="map__mark">
+      <div class="map__mark" v-for="mark in marks" :key="mark">
         <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Уральск</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Актау</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Атырау</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Актобе</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Кызылорда</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Костанай</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Туркестан</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Шымкент</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Петропавловск</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Кокшетау</span>
-      </div>
-      <div class="map__mark map__mark--active">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Астана</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Тараз</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Павлодар</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Караганда</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Семей</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Усть-Каменогорск</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Талдыкорган</span>
-      </div>
-      <div class="map__mark">
-        <img src="@/assets/img/icons/mark.svg" alt="" />
-        <span>Алматы</span>
+        <span>{{ mark }}</span>
       </div>
     </div>
     <img class="map__bg" src="@/assets/img/map.png" alt="" />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { reactive } from 'vue';
+
+const marks = reactive([
+  'Уральск',
+  'Актау',
+  'Атырау',
+  'Актобе',
+  'Кызылорда',
+  'Костанай',
+  'Туркестан',
+  'Шымкент',
+  'Петропавловск',
+  'Кокшетау',
+  'Астана',
+  'Тараз',
+  'Павлодар',
+  'Караганда',
+  'Семей',
+  'Усть-Каменогорск',
+  'Талдыкорган',
+  'Алматы',
+]);
+</script>
 
 <style lang="less" scoped>
 @import '@/assets/less/vars.less';
@@ -318,7 +273,7 @@
 
       &:nth-child(16) {
         right: unset;
-        left: calc(50vw + 30.7%)
+        left: calc(50vw + 30.7%);
       }
 
       &:nth-child(17) {

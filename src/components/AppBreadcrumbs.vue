@@ -62,7 +62,6 @@ defineProps({
   }
 
   &__link {
-    font-size: 14px;
     color: #7d7d7d;
 
     &:hover {
@@ -81,13 +80,11 @@ defineProps({
     &__item {
       &:not(:last-child) {
         margin-right: 8px;
-      }
-    }
 
-    &__item {
-      &:not(:last-child):after {
-        .pseudo-icon('../img/icons/right-gray.svg', 5px, 9px);
-        margin-left: 8px;
+        &:after {
+          .pseudo-icon('../img/icons/right-gray.svg', 5px, 9px);
+          margin-left: 8px;
+        }
       }
     }
   }

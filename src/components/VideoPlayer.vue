@@ -1,23 +1,24 @@
 <template>
   <div class="video-player info-section__video" :class="{ 'video-player--active': isActive }">
-    <img class="video-player__bg" :src="getImage(preview)" alt="" />
-    <button class="video-player__play" @click="openVideo"></button>
+    <img class="video-player__bg" :src="useImage(preview)" alt="" />
+    <button class="video-player__play" :class="btnClass" @click="openVideo"></button>
     <video
       v-if="isActive"
       class="video-player__video"
       autoplay
       controls
-      :src="getVideo(url)"
+      muted
+      :src="useVideo(url)"
     ></video>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { getImage } from '@/hooks/img';
-import { getVideo } from '@/hooks/video';
+import { ref, computed } from 'vue';
+import { useImage } from '@/hooks/img';
+import { useVideo } from '@/hooks/video';
 
-defineProps({
+const props = defineProps({
   url: {
     type: String,
     required: true
@@ -25,10 +26,21 @@ defineProps({
   preview: {
     type: String,
     default: null
+  },
+  btnType: {
+    type: String,
+    default: null
   }
 });
 
 const isActive = ref(false);
+const btnClass = computed(() => {
+  if (props.btnType) {
+    return `video-player__play video-player__play--${props.btnType}`;
+  }
+
+  return 'video-player__play';
+});
 
 function openVideo() {
   isActive.value = true;
@@ -70,9 +82,24 @@ function openVideo() {
     top: 50%;
     z-index: 2;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:before {
-      .pseudo-icon('../img/icons/play.svg', 32px, 32px);
+      .pseudo-icon('../img/icons/play.svg', 32px, 32px, block);
+    }
+
+    &--2 {
+      width: 54px;
+      height: 54px;
+      background: rgba(#fff, 0.4);
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+
+      &:before {
+        .pseudo-icon('../img/icons/play-simple.svg', 22px, 24px, block);
+      }
     }
   }
 
@@ -82,6 +109,23 @@ function openVideo() {
 
   &--active &__play {
     display: none;
+  }
+
+  @media (max-width: 767px) {
+    &__play {
+      &--2 {
+        width: 44px;
+        height: 44px;
+        background: rgba(#fff, 0.4);
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+
+        &:before {
+          width: 18px;
+          height: 20px;
+        }
+      }
+    }
   }
 }
 </style>

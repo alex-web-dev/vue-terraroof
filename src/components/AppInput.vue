@@ -42,7 +42,7 @@ defineProps({
 });
 
 function maskInput(val) {
-  emit('update:modelValue', val.target.value)
+  emit('update:modelValue', val.target.value);
 }
 </script>
 
