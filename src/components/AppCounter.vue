@@ -1,6 +1,6 @@
 <template>
   <div class="counter" :class="{ 'counter--high': size === 'high' }">
-    <button type="button" class="counter__minus" @click="updateValue(-1)">-</button>
+    <button type="button" class="counter__minus" @click="updateValue(-1)" :disabled="readonly">-</button>
     <input
       class="counter__input"
       type="number"
@@ -8,7 +8,7 @@
       @input="emit('update:value', $event.target.value)"
       :readonly="readonly"
     />
-    <button type="button" class="counter__plus" @click="updateValue(1)">+</button>
+    <button type="button" class="counter__plus" @click="updateValue(1)" :disabled="readonly">+</button>
   </div>
 </template>
 
@@ -25,7 +25,7 @@ const props = defineProps({
   },
   readonly: {
     type: Boolean,
-    default: true
+    default: false
   },
   size: {
     type: String,
@@ -34,6 +34,10 @@ const props = defineProps({
 });
 
 function updateValue(num) {
+  if (props.readonly) {
+    return;
+  }
+
   if (props.onlyPositive && props.value <= 1 && num < 0) {
     return;
   }
@@ -73,6 +77,10 @@ function updateValue(num) {
     height: 20px;
     font-size: 18px;
     line-height: 20px;
+
+    &:disabled {
+      cursor: default;
+    }
   }
 
   @media (max-width: 767px) {

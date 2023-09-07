@@ -42,15 +42,14 @@
       <div class="product-form__price">
         <div class="product-form__label">Цена:</div>
         <span v-if="info.priceOld" class="product-form__price-old">
-          <span class="product-form__price-old-value">{{ info.priceOld * count }}</span>
+          <span class="product-form__price-old-value">{{ info.priceOld }}</span>
         </span>
         <span class="product-form__price-new">
-          <span class="product-form__price-new-value">{{ info.price * count }}</span>
+          <span class="product-form__price-new-value">{{ info.price }}</span>
           тг
         </span>
       </div>
       <div class="product-form__buy-footer">
-        <AppCounter class="product-form__counter" :value="count" @update:value="count = $event" />
         <input type="hidden" :value="info.id" />
 
         <button v-if="!storeCart.hasItem(props.info.id)" class="btn product-form__buy-btn">
@@ -69,10 +68,9 @@
 
 <script setup>
 import CheckboxColor from '@/components/CheckboxColor.vue';
-import AppCounter from '@/components/AppCounter.vue';
 import { useCart } from '@/stores/cart';
 import { useMessages } from '@/stores/messages';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 const storeCart = useCart();
 const storeMessages = useMessages();
@@ -86,10 +84,6 @@ const props = defineProps({
     type: Object,
     default: null
   }
-});
-const count = computed(() => {
-  const cartItem = storeCart.getItem(props.info.id);
-  return cartItem ? cartItem.count : 1;
 });
 
 function addToCart(id, count) {
@@ -206,10 +200,6 @@ function addToCart(id, count) {
     &-btn {
       flex: 1 1 auto;
       font-size: 18px;
-
-      &:not(:first-child) {
-        margin-left: 18px;
-      }
     }
   }
 
@@ -263,10 +253,6 @@ function addToCart(id, count) {
       &-btn {
         margin-top: 18px;
         width: 100%;
-
-        &:not(:first-child) {
-          margin-left: 0;
-        }
       }
     }
   }
