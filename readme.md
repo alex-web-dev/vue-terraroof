@@ -1,1 +1,1 @@
-Link - https://alex-web-dev.github.io/vue-terraroof/dist
+Link - https://alex-web-dev.github.io/vue-terraroof/
