@@ -1,7 +1,7 @@
 <template>
   <div class="team-card">
     <div class="team-card__img">
-      <img v-if="data.img" class="load-img" :src="useImage(data.img)" alt="" />
+      <img v-if="data.img" class="load-img" :src="getImage(data.img)" alt="" />
     </div>
     <h3 v-if="data.title" class="title5 team-card__title">{{ data.title }}</h3>
     <div v-if="data.position" class="team-card__position">{{ data.position }}</div>
@@ -11,6 +11,7 @@
 <script setup>
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 defineProps({
   data: {
     type: Object,

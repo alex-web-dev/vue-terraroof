@@ -4,7 +4,7 @@
       class="product-card__img-box product-card__img-box--large"
       :to="{ name: 'product', params: { id: data.id } }"
     >
-      <img class="product-card__img" :src="useImage(data.img)" alt="" />
+      <img class="product-card__img" :src="getImage(data.img)" alt="" />
       <AppTags class="product-card__tags" v-if="data.tags" list-position="end" :list="data.tags" />
     </RouterLink>
     <div class="product-card__info product-card__info--large">
@@ -13,7 +13,7 @@
       </h3>
       <div class="product-card__meta">
         <div class="text text--gray product-card__status">{{ available }}</div>
-        <img class="product-card__logo" :src="useImage(data.companyImg)" alt="" />
+        <img class="product-card__logo" :src="getImage(data.companyImg)" alt="" />
       </div>
       <p class="text text--gray product-card__text">{{ data.text }}</p>
       <div class="product-card__price">
@@ -40,6 +40,7 @@ import AppTags from '@/components/AppTags.vue';
 import { RouterLink } from 'vue-router';
 import { computed } from 'vue';
 
+const { getImage } = useImage();
 const props = defineProps({
   type: {
     type: String,

@@ -27,10 +27,10 @@
               v-for="company in companies"
               :key="company"
             >
-              <img class="footer__company-img" :src="useImage(company.img)" alt="" />
+              <img class="footer__company-img" :src="getImage(company.img)" alt="" />
               <img
                 class="footer__company-img footer__company-img--hover"
-                :src="useImage(company.imgHover)"
+                :src="getImage(company.imgHover)"
                 alt=""
               />
             </a>
@@ -46,6 +46,7 @@ import { reactive } from 'vue';
 import SocialLinks from '@/components/SocialLinks.vue';
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 const menuList = reactive([
   {
     routerName: 'about',

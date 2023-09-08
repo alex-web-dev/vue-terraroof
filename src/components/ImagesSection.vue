@@ -33,7 +33,7 @@
                   v-for="innerImage in images"
                   :key="innerImage"
                 >
-                  <img class="images-section__img" :src="useImage(innerImage)" alt="" />
+                  <img class="images-section__img" :src="getImage(innerImage)" alt="" />
                 </swiper-slide>
               </swiper-container>
             </swiper-slide>
@@ -65,6 +65,7 @@ import { useModals } from '@/stores/modals';
 import 'swiper/css';
 import 'swiper/element/css/effect-fade';
 
+const { getImage } = useImage();
 const storeModals = useModals();
 
 register();

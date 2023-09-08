@@ -12,7 +12,7 @@
         >
           <swiper-slide v-for="img in images" :key="img">
             <div class="igallery-modal__img">
-              <img :src="useImage(img)" alt="" />
+              <img :src="getImage(img)" alt="" />
             </div>
           </swiper-slide>
         </swiper-container>
@@ -36,6 +36,7 @@ import { Navigation } from 'swiper/modules';
 
 register();
 
+const { getImage } = useImage();
 const modules = [Navigation];
 const props = defineProps({
   images: {

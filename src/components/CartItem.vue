@@ -1,7 +1,7 @@
 <template>
   <div class="cart-item cart__item">
     <RouterLink class="cart-item__img" :to="{ name: 'product', params: { id: data.id } }">
-      <img :src="useImage(data.img)" alt="" />
+      <img :src="getImage(data.img)" alt="" />
     </RouterLink>
     <div class="cart-item__info">
       <h2 class="title5 cart-item__title">
@@ -30,6 +30,7 @@
 import AppCounter from '@/components/AppCounter.vue';
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 defineProps({
   data: {
     type: Object,

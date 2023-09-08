@@ -2,7 +2,7 @@
   <div class="contact-item">
     <h3 v-if="title" class="title4 price-list__title">{{ title }}</h3>
     <div v-if="icon" class="contact-item__icon">
-      <img :src="useImage(icon)" alt="" />
+      <img :src="getImage(icon)" alt="" />
     </div>
     <div v-if="subtitle" class="text text--gray contact-item__name">{{ subtitle }}</div>
     <div v-if="value" class="contact-item__value">{{ value }}</div>
@@ -13,6 +13,8 @@
 
 <script setup>
 import { useImage } from '@/hooks/img';
+
+const { getImage } = useImage();
 
 defineProps({
   title: {

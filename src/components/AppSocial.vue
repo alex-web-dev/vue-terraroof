@@ -14,7 +14,7 @@
             target="_blank"
             :key="item"
           >
-            <img class="social__item-icon" :src="useImage(item.icon)" alt="" />
+            <img class="social__item-icon" :src="getImage(item.icon)" alt="" />
             <span class="social__item-text">{{ item.text }}</span>
           </a>
         </div>
@@ -27,6 +27,7 @@
 import { ref } from 'vue';
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 const socialList = ref([
   {
     link: 'https://www.instagram.com/',

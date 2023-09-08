@@ -3,7 +3,7 @@
     <img
       class="tag__icon"
       :class="{ 'tag__icon--sm-small': size === 'sm-small' }"
-      :src="useImage(selectedTag.icon)"
+      :src="getImage(selectedTag.icon)"
       alt=""
     />
     <span class="tag__text">{{ text }}</span>
@@ -14,6 +14,7 @@
 import { ref, computed } from 'vue';
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 const props = defineProps({
   type: {
     type: String,

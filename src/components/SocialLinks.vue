@@ -8,7 +8,7 @@
         target="_blank"
         :key="item"
       >
-        <img :src="useImage(item.icon)" alt="" />
+        <img :src="getImage(item.icon)" alt="" />
       </a>
     </div>
   </div>
@@ -17,6 +17,7 @@
 <script setup>
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 defineProps({
   list: {
     type: Array,

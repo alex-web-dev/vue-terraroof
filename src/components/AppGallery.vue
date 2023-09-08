@@ -28,7 +28,7 @@
               img-class="gallery__img"
             />
             <a v-else class="gallery__item" :href="item.link" target="_blank">
-              <img class="gallery__img" :src="useImage(item.img)" alt="" />
+              <img class="gallery__img" :src="getImage(item.img)" alt="" />
             </a>
           </template>
         </div>
@@ -43,6 +43,7 @@ import { useSlots } from 'vue';
 import { useImage } from '@/hooks/img';
 
 const slots = useSlots();
+const { getImage } = useImage();
 
 defineProps({
   type: {

@@ -15,7 +15,7 @@
           <div class="banner__features-title">Полностью за наш счет:</div>
           <div class="banner__features-list">
             <div class="banner__feature" v-for="feature in features" :key="feature">
-              <img class="banner__feature-icon" :src="useImage(feature.img)" alt="" />
+              <img class="banner__feature-icon" :src="getImage(feature.img)" alt="" />
               <span class="banner__feature-text">{{ feature.text }}</span>
             </div>
           </div>
@@ -32,7 +32,7 @@
           :autoplay="swiperOptions.autoplay"
         >
           <swiper-slide class="banner__slide" v-for="img in sliderImages" :key="img">
-            <img :src="useImage(img)" alt="" />
+            <img :src="getImage(img)" alt="" />
           </swiper-slide>
         </swiper-container>
         <div class="banner__pagination"></div>
@@ -50,7 +50,7 @@ import { reactive } from 'vue';
 register();
 
 const modules = [Pagination, Autoplay];
-
+const { getImage } = useImage();
 const swiperOptions = {
   speed: 700,
   loop: true,

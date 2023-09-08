@@ -14,7 +14,7 @@
               @click="emit('clickOnLink')"
             >
               <div class="catalog-menu__item-img">
-                <img :src="useImage(item.img)" alt="" />
+                <img :src="getImage(item.img)" alt="" />
               </div>
               <div class="catalog-menu__item-title">{{ item.title }}</div>
             </RouterLink>
@@ -33,6 +33,7 @@ import { useImage } from '@/hooks/img';
 import Simplebar from 'simplebar-vue';
 import 'simplebar-vue/dist/simplebar.min.css';
 
+const { getImage } = useImage();
 const emit = defineEmits(['clickOutside', 'close', 'clickOnLink']);
 const $catalogMenu = ref(null);
 

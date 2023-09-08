@@ -6,11 +6,12 @@ export function useBody() {
   function lockBody() {
     const { getScrollbarWidthPX } = useScrollbar();
 
-    document.body.classList.add('body--lock');
     document.body.style.paddingRight = getScrollbarWidthPX();
 
     const $absoluteElems = document.querySelectorAll(ABSOLUTE_ELEMS);
     $absoluteElems.forEach(($elem) => ($elem.style.paddingRight = getScrollbarWidthPX()));
+    
+    document.body.classList.add('body--lock');
   }
 
   function unlockBody() {

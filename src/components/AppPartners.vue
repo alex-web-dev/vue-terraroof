@@ -17,7 +17,7 @@
           >
             <swiper-slide class="partners__slide" v-for="img in images" :key="img">
               <div class="igallery-modal__img">
-                <img class="partners__img" :src="useImage(img)" alt="" />
+                <img class="partners__img" :src="getImage(img)" alt="" />
               </div>
             </swiper-slide>
           </swiper-container>
@@ -37,6 +37,7 @@ import 'swiper/css';
 
 register();
 
+const { getImage } = useImage();
 const props = defineProps({
   title: {
     type: String,

@@ -13,7 +13,7 @@
       v-if="preview"
       class="youtube-player__preview"
       :class="[imgClass]"
-      :src="useImage(preview)"
+      :src="getImage(preview)"
       alt=""
     />
     <button class="youtube-player__play" @click="isActive = true"></button>
@@ -24,6 +24,7 @@
 import { ref } from 'vue';
 import { useImage } from '@/hooks/img';
 
+const { getImage } = useImage();
 defineProps({
   src: {
     type: String,

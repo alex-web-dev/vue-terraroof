@@ -14,7 +14,7 @@
       </button>
     </div>
     <div v-if="img" class="cooperate-item__img">
-      <img class="load-img" :src="useImage(img)" alt="" />
+      <img class="load-img" :src="getImage(img)" alt="" />
     </div>
   </div>
 </template>
@@ -24,6 +24,8 @@ import { useImage } from '@/hooks/img';
 import { useModals } from '@/stores/modals';
 import TextContent from '@/components/TextContent.vue';
 
+
+const { getImage } = useImage();
 const storeModals = useModals();
 
 defineProps({

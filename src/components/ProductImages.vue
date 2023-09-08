@@ -9,7 +9,7 @@
       <div class="product-images__main">
         <IGalleryImg
           class="product-images__main-img"
-          :src="useImage(images.mainImg)"
+          :src="getImage(images.mainImg)"
           alt=""
           @click="openGallery(event, 0)"
         />
@@ -21,7 +21,7 @@
           v-for="(img, index) in images.otherImages"
           :key="img"
         >
-          <IGalleryImg :src="useImage(img)" alt="" @click="openGallery(event, index + 1)" />
+          <IGalleryImg :src="getImage(img)" alt="" @click="openGallery(event, index + 1)" />
         </div>
       </div>
     </IGallery>
@@ -35,6 +35,7 @@ import { useImage } from '@/hooks/img';
 import IGalleryImg from '@/components/IGalleryImg.vue';
 import { ref } from 'vue';
 
+const { getImage } = useImage();
 defineProps({
   images: {
     type: Array,

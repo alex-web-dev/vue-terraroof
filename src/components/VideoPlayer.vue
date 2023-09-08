@@ -1,6 +1,6 @@
 <template>
   <div class="video-player info-section__video" :class="{ 'video-player--active': isActive }">
-    <img class="video-player__bg" :src="useImage(preview)" alt="" />
+    <img class="video-player__bg" :src="getImage(preview)" alt="" />
     <button class="video-player__play" :class="btnClass" @click="openVideo"></button>
     <video
       v-if="isActive"
@@ -18,6 +18,7 @@ import { ref, computed } from 'vue';
 import { useImage } from '@/hooks/img';
 import { useVideo } from '@/hooks/video';
 
+const { getImage } = useImage();
 const props = defineProps({
   url: {
     type: String,

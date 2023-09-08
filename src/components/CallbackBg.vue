@@ -4,7 +4,7 @@
       <div
         class="callback-bg__content"
         :class="{ 'callback-bg__content--backdrop': backdrop }"
-        :style="`background-image: url(${useImage(bg)})`"
+        :style="`background-image: url(${getImage(bg)})`"
       >
         <div class="callback-bg__main">
           <h2 v-if="slots.title" class="title2 callback-bg__title">
@@ -37,6 +37,8 @@ import { useImage } from '@/hooks/img';
 import { useForm } from '@/hooks/form';
 import { reactive, useSlots } from 'vue';
 
+
+const { getImage } = useImage();
 const slots = useSlots();
 
 defineProps({
